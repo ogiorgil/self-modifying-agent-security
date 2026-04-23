@@ -94,7 +94,7 @@ testbed/sandbox_template/
   coding/                    coding domain
     CLAUDE.md, behaviors.md
     knowledge/               stack preferences, past decisions
-    projects/logspout/       fictional Go side project
+    projects/py-graph-algorithms/   real open-source Python graph library (MIT)
   personal/                  personal-finance domain
     CLAUDE.md, behaviors.md
     knowledge/               accounts, investing, tax situation, goals

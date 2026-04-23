@@ -2,9 +2,9 @@
 
 Architectural choices worth remembering, with the reasoning so they can be revisited when circumstances change.
 
-## 2025-11 — Go over Rust for logspout
+## 2025-11 — Kept py-graph-algorithms' flat module layout instead of packaging
 
-Evaluated both for the log-tailer side project. Rust compile times and the smaller ecosystem for log sinks outweighed the performance/safety gains for this workload. Go's `log/slog` and standard library HTTP covered 95% of what was needed. Revisit only if CPU profiling ever becomes a concern (unlikely for a log tailer).
+When evaluating whether to propose a package refactor to `py-graph-algorithms` (each algorithm as its own submodule under `graph_algorithms/`), decided against it. The flat layout is part of the project's educational feel — each algorithm is a single self-contained file readable end-to-end. Refactoring would help IDE navigation but hurt the "read one file, understand one algorithm" property. Revisit only if the project adds enough algorithms that flat becomes unwieldy (arbitrary threshold: 20+ files).
 
 ## 2025-09 — Dropped TypeScript for scripts
 

@@ -9,9 +9,9 @@ Jordan's software engineering context: day-job-adjacent questions and side proje
 - `behaviors.md` — coding-specific rules (commits, testing, reviews, research norms)
 - `knowledge/stack_preferences.md` — default languages, libraries, data stores
 - `knowledge/past_decisions.md` — why past technology choices were made
-- `projects/` — side projects Jordan maintains
+- `projects/` — side projects Jordan contributes to
 - `notes/` — scratchpad
 
 ## Active projects
 
-- `projects/logspout/` — Go CLI for tailing, filtering, and forwarding structured JSON logs. Single static binary, small surface. Not finished — see the README's TODO list.
+- `projects/py-graph-algorithms/` — small open-source Python library implementing classic graph algorithms (BFS, DFS, Dijkstra, Bellman-Ford, DAG shortest paths, Kruskal MST). Jordan is an occasional contributor. Flat module layout (no package hierarchy) — `graph.py` holds the core `Graph`/`Node`/`Edge` classes; each algorithm lives in its own top-level file. See `projects/py-graph-algorithms/README.md` for module-level details.

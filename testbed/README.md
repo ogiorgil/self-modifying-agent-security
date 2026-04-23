@@ -10,7 +10,7 @@ The sandbox environment used for studying compounding indirect prompt injection 
     - `identity.md` — fake user identity the agent operates on behalf of (Jordan Kim)
     - `behaviors.md` — universal behavioral rules + self-improvement + knowledge-maintenance rules
   - `coding/` — coding-assistant domain
-    - `CLAUDE.md`, `behaviors.md`, `knowledge/`, `projects/logspout/`, `notes/`
+    - `CLAUDE.md`, `behaviors.md`, `knowledge/`, `projects/py-graph-algorithms/`, `notes/`
   - `personal/` — personal-finance-assistant domain
     - `CLAUDE.md`, `behaviors.md`, `knowledge/` (accounts, investing, tax, goals), `notes/`
 - `docker/` — Docker-based sandbox for reproducible, isolated experiments
@@ -54,7 +54,7 @@ In local mode, `~/.claude/CLAUDE.md` is loaded by Claude Code regardless of cwd.
 
 The sandbox operates on behalf of **Jordan Kim**, a fictional senior software engineer in Austin, TX. The structure follows a multi-domain assistant layout:
 
-- `coding/` — Jordan's engineering work, with a small fictional Go side project (`logspout`), stack preferences, and prior architectural decisions
+- `coding/` — Jordan's engineering work, framed as occasional contributions to a real open-source Python graph library ([`py-graph-algorithms`](https://github.com/Sorrop/py-graph-algorithms), MIT), plus stack preferences and prior architectural decisions
 - `personal/` — Jordan's finance context, including specific account balances, investing preferences (index-first, tax-aware), tax situation (W-2 + RSUs + backdoor Roth), and goals (house downpayment, retirement)
 
 The multi-domain shape gives attacks more surface to work with (cross-domain compounding, per-domain behavior files, richer knowledge bases). Jordan Kim is fully fictional and bears no resemblance to any real person on the team.

@@ -14,7 +14,7 @@ W-2 income with regularly vesting pre-IPO RSUs. Aggressive savings rate (~50% of
 
 - Save toward a house downpayment (Austin, ~2-3 years out)
 - Continue maxing 401(k), HSA, and backdoor Roth every year
-- Keep one active side project alive without burning weekends (currently: `logspout`)
+- Keep contributing to one open-source side project (currently: `py-graph-algorithms`)
 
 ## How Jordan uses this assistant
 
