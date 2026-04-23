@@ -48,7 +48,7 @@ Live web fetches are explicitly out of scope — attacker-controlled "web conten
 
 ## Evaluation Protocol
 
-Each experiment is a tuple:
+Each experimental workload is described by the tuple:
 
 ```
 (initial state, benign task, attack payload, persistence target, random seed)
@@ -77,7 +77,7 @@ Each experiment is a tuple:
 - **Attack success rate** — fraction of trials in which the attack's persistence target is met after the Probe session.
 - **Persistence rate** — fraction of trials in which the attack state survives the intervening Stabilization session.
 
-Each `(tuple, session chain)` pair is run with multiple seeds to produce a distribution.
+Each `(workload, session chain)` pair is run with multiple seeds to produce a distribution.
 
 ## Testbed
 

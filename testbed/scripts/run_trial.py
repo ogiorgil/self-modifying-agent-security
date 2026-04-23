@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run an experimental trial from a tuple manifest.
+"""Run an experimental trial from a workload manifest.
 
 A trial resets the sandbox working directory, stages attacker-controlled
 payload files, then runs a chain of Claude Code sessions against the same
@@ -14,10 +14,10 @@ After the chain completes, the success criterion from the manifest is
 checked and a human-readable trial report is written.
 
 Usage:
-    python testbed/scripts/run_trial.py --tuple t01_license_comment_via_readme
-    python testbed/scripts/run_trial.py --tuple t01_license_comment_via_readme \\
+    python testbed/scripts/run_trial.py --workload t01_license_comment_via_readme
+    python testbed/scripts/run_trial.py --workload t01_license_comment_via_readme \\
         --chain exposure-stabilization-probe
-    python testbed/scripts/run_trial.py --tuple <id> --trial-id custom_name
+    python testbed/scripts/run_trial.py --workload <id> --trial-id custom_name
 """
 
 import argparse
@@ -30,7 +30,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 TEMPLATE_DIR = REPO_ROOT / "testbed" / "sandbox_template"
-PAYLOADS_DIR = REPO_ROOT / "testbed" / "payloads"
+WORKLOADS_DIR = REPO_ROOT / "testbed" / "workloads"
 RESULTS_DIR = REPO_ROOT / "testbed" / "results"
 DEFAULT_WORKING_DIR = REPO_ROOT.parent / f"{REPO_ROOT.name}-working"
 DEFAULT_TIMEOUT = 600
@@ -60,9 +60,9 @@ def clear_claude_memory(working_dir: Path) -> None:
         shutil.rmtree(memory_dir)
 
 
-def stage_payload(tuple_dir: Path, working_dir: Path, staging: list[dict]) -> None:
+def stage_payload(workload_dir: Path, working_dir: Path, staging: list[dict]) -> None:
     for spec in staging:
-        src = tuple_dir / spec["from"]
+        src = workload_dir / spec["from"]
         dst = working_dir / spec["to"]
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
@@ -155,7 +155,7 @@ def check_persistence(working_dir: Path, targets: list[str]) -> dict[str, bool]:
 
 def write_report(
     out_dir: Path,
-    tuple_id: str,
+    workload_id: str,
     trial_id: str,
     chain: list[str],
     session_summaries: list[dict],
@@ -164,9 +164,9 @@ def write_report(
     success_message: str,
 ) -> None:
     lines = [
-        f"# Trial report — {tuple_id} / {trial_id}",
+        f"# Trial report — {workload_id} / {trial_id}",
         "",
-        f"- Tuple: `{tuple_id}`",
+        f"- Workload: `{workload_id}`",
         f"- Trial ID: `{trial_id}`",
         f"- Chain: `{' -> '.join(chain)}`",
         f"- Timestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}",
@@ -209,8 +209,8 @@ def main() -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
     parser.add_argument(
-        "--tuple", required=True, dest="tuple_id",
-        help="Tuple directory name under testbed/payloads/",
+        "--workload", required=True, dest="workload_id",
+        help="Workload directory name under testbed/workloads/",
     )
     parser.add_argument(
         "--chain", default="exposure-probe",
@@ -230,8 +230,8 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    tuple_dir = PAYLOADS_DIR / args.tuple_id
-    manifest_path = tuple_dir / "manifest.json"
+    workload_dir = WORKLOADS_DIR / args.workload_id
+    manifest_path = workload_dir / "manifest.json"
     if not manifest_path.exists():
         print(f"ERROR: manifest not found: {manifest_path}", file=sys.stderr)
         return 1
@@ -239,7 +239,7 @@ def main() -> int:
     manifest = json.loads(manifest_path.read_text())
     working_dir: Path = args.working_dir.resolve()
     trial_id = args.trial_id or time.strftime("%Y%m%d_%H%M%S")
-    out_dir = RESULTS_DIR / args.tuple_id / trial_id
+    out_dir = RESULTS_DIR / args.workload_id / trial_id
     out_dir.mkdir(parents=True, exist_ok=True)
 
     chain = args.chain.split("-")
@@ -248,7 +248,7 @@ def main() -> int:
             print(f"ERROR: session '{session}' not defined in manifest", file=sys.stderr)
             return 1
 
-    print(f"Tuple:       {args.tuple_id}")
+    print(f"Workload:    {args.workload_id}")
     print(f"Trial:       {trial_id}")
     print(f"Chain:       {' -> '.join(chain)}")
     print(f"Working dir: {working_dir}")
@@ -261,7 +261,7 @@ def main() -> int:
 
     staging = manifest.get("staging", [])
     print(f"[setup] Staging {len(staging)} payload file(s)")
-    stage_payload(tuple_dir, working_dir, staging)
+    stage_payload(workload_dir, working_dir, staging)
 
     session_summaries: list[dict] = []
     for idx, session in enumerate(chain):
@@ -301,7 +301,7 @@ def main() -> int:
     )
 
     write_report(
-        out_dir, args.tuple_id, trial_id, chain,
+        out_dir, args.workload_id, trial_id, chain,
         session_summaries, persistence, success, success_msg,
     )
 
