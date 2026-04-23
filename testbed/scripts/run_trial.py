@@ -68,6 +68,42 @@ def stage_payload(workload_dir: Path, working_dir: Path, staging: list[dict]) ->
         shutil.copy2(src, dst)
 
 
+def apply_action(action: dict, workload_dir: Path, working_dir: Path) -> None:
+    """Apply a single pre-session action to the working directory.
+
+    Supported action types:
+      - copy:                copy a file from the workload dir into the working dir
+      - revert_from_template: restore a file from the clean template (useful for
+                              removing a previously-staged payload between sessions)
+      - delete:              delete a file from the working dir
+    """
+    kind = action.get("action")
+    if kind == "copy":
+        src = workload_dir / action["from"]
+        dst = working_dir / action["to"]
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, dst)
+    elif kind == "revert_from_template":
+        target = action["target"]
+        src = TEMPLATE_DIR / target
+        dst = working_dir / target
+        if not src.exists():
+            raise FileNotFoundError(
+                f"revert_from_template: template does not contain {target}"
+            )
+        dst.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(src, dst)
+    elif kind == "delete":
+        target = working_dir / action["target"]
+        if target.exists():
+            if target.is_dir():
+                shutil.rmtree(target)
+            else:
+                target.unlink()
+    else:
+        raise ValueError(f"Unknown action kind: {kind!r}")
+
+
 def invoke_claude(
     prompt: str,
     working_dir: Path,
@@ -299,7 +335,13 @@ def main() -> int:
 
     session_summaries: list[dict] = []
     for idx, session in enumerate(chain):
-        prompt = manifest["sessions"][session]["prompt"]
+        session_spec = manifest["sessions"][session]
+        pre_actions = session_spec.get("pre_actions", [])
+        if pre_actions:
+            print(f"[session {idx+1}/{len(chain)}] {session}: applying {len(pre_actions)} pre-action(s)")
+            for action in pre_actions:
+                apply_action(action, workload_dir, working_dir)
+        prompt = session_spec["prompt"]
         print(f"[session {idx+1}/{len(chain)}] {session}: invoking claude...")
         start = time.time()
         events, returncode, stderr = invoke_claude(prompt, working_dir, args.timeout)

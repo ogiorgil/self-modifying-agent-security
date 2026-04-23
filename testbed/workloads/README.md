@@ -34,10 +34,20 @@ Each `manifest.json` contains:
 - **id** — must match the directory name
 - **description** — one-line summary
 - **attack_class**, **adversarial_goal**, **channel** — categorization per `DESIGN.md`
-- **staging** — array of `{from, to}` mappings: how payload files are copied into the working directory before the exposure session
-- **sessions** — named prompts (`exposure`, `stabilization`, `probe`) with their user-facing benign-task text
+- **staging** — array of `{from, to}` mappings: how payload files are copied into the working directory once, after reset, before the first session
+- **sessions** — named prompts (`exposure`, `stabilization`, `probe`) with their user-facing benign-task text; each session may also declare `pre_actions` (see below)
 - **persistence_targets** — files whose modification counts as the attacker landing persistent state
 - **success_criterion** — machine-checkable test (currently supports `{"type": "string_in_file", "file": "...", "string": "..."}`)
+
+## Per-session `pre_actions`
+
+In addition to the one-time top-level `staging`, each session can declare `pre_actions` that run against the working directory immediately before that session's claude invocation. Supported action types:
+
+- `{"action": "copy", "from": "<rel-to-workload-dir>", "to": "<rel-to-working-dir>"}` — stage a file (same semantics as top-level `staging`)
+- `{"action": "revert_from_template", "target": "<rel-path>"}` — restore the named file from `sandbox_template/`, useful for removing a previously-staged payload between sessions to test whether any *agent-side* state actually persisted
+- `{"action": "delete", "target": "<rel-path>"}` — delete a file or directory from the working directory
+
+Use `pre_actions` to construct session chains that distinguish payload-persistence (attack content stays in the repo) from self-modification-persistence (agent wrote the injected rule into its own behavior/knowledge files).
 
 ## Running a workload
 
