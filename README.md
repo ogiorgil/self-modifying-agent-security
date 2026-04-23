@@ -6,11 +6,21 @@ CSE 599R (Agentic Systems Security) final project, Spring 2026.
 
 A growing class of agentic systems is designed to maintain persistent memory and modify their own behavioral rules over time (e.g., Claude Code with `CLAUDE.md`, Cursor with rule files, OpenClaw with `SOUL.md`). We study how indirect prompt injection compounds through these systems — whether a single adversarial input can propagate into persistent state and affect future sessions as trusted context.
 
-See [`DESIGN.md`](DESIGN.md) for the full project plan and research questions.
+See [`DESIGN.md`](DESIGN.md) for the full project plan, threat model, evaluation protocol, and research questions.
+
+## Current Status
+
+- **Threat model & evaluation protocol:** defined (see `DESIGN.md`)
+- **Testbed:** multi-domain sandbox at `testbed/sandbox_template/` with a fictional user and rich knowledge/behavior surface; self-modification primitive verified
+- **Attack payload delivery:** local staged files (e.g., a markdown/HTML file the user frames as "I downloaded this page")
+- **Trial driver:** pending
+- **First end-to-end experiment:** pending
 
 ## Layout
 
-- `DESIGN.md` — project plan, research questions, methods
-- `DEV_CONTEXT.md` — instructions for AI-assistant-based development
-- `testbed/` — sandbox testbed (coming soon)
-- `docs/` — shared meeting notes and design decisions
+- `DESIGN.md` — project plan, threat model, evaluation protocol, research questions
+- `DEV_CONTEXT.md` — instructions for AI-assistant-based development on this repo
+- `testbed/` — sandbox testbed and experiment scripts
+  - `sandbox_template/` — clean initial state of the attack target
+  - `scripts/` — reset and (soon) trial driver scripts
+  - `docker/` — optional Docker-based sandbox (deferred until after interim presentation)
