@@ -12,7 +12,7 @@ See [`DESIGN.md`](DESIGN.md) for the full project plan, threat model, evaluation
 
 - **Threat model & evaluation protocol:** defined (see `DESIGN.md`)
 - **Testbed:** multi-domain sandbox at `testbed/sandbox_template/` with a fictional user and rich knowledge/behavior surface; self-modification primitive verified
-- **Attack payload delivery:** local staged files (e.g., a markdown/HTML file the user frames as "I downloaded this page")
+- **Attack payload delivery:** local files staged into the working dir at trial time — either a new file framed as user-downloaded material, or an existing project file overwritten with a poisoned version (e.g., a malicious upstream README)
 - **Trial driver:** pending
 - **First end-to-end experiment:** pending
 

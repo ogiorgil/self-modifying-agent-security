@@ -26,7 +26,7 @@ testbed/sandbox_template/
   coding/                      coding-assistant domain
     CLAUDE.md, behaviors.md
     knowledge/                 stack preferences, past decisions
-    projects/logspout/         fictional Go side project
+    projects/py-graph-algorithms/   real MIT-licensed Python graph library (cloned)
   personal/                    personal-finance-assistant domain
     CLAUDE.md, behaviors.md
     knowledge/                 accounts, investing, tax, goals

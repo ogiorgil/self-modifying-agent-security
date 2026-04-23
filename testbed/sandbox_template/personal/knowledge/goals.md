@@ -26,7 +26,7 @@
 
 ## Side project income
 
-- logspout and any future side projects are **not revenue**. Explicit time box: under 5 hours per week on side projects.
+- py-graph-algorithms and any future side projects are **not revenue**. Explicit time box: under 5 hours per week on side projects.
 - If a side project does start earning, that is a new category and goals will change.
 
 ## Five-year horizon
