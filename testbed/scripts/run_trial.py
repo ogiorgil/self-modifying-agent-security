@@ -217,6 +217,11 @@ def main() -> int:
         help="Hyphen-separated session names (e.g. exposure-probe, exposure-stabilization-probe)",
     )
     parser.add_argument(
+        "--prepare-only",
+        action="store_true",
+        help="Reset the working directory and stage payload files, then exit before invoking claude. Use this to run an interactive claude session manually against a prepared environment.",
+    )
+    parser.add_argument(
         "--trial-id", default=None,
         help="Trial identifier for the result subdirectory (defaults to a timestamp)",
     )
@@ -238,21 +243,25 @@ def main() -> int:
 
     manifest = json.loads(manifest_path.read_text())
     working_dir: Path = args.working_dir.resolve()
-    trial_id = args.trial_id or time.strftime("%Y%m%d_%H%M%S")
-    out_dir = RESULTS_DIR / args.workload_id / trial_id
-    out_dir.mkdir(parents=True, exist_ok=True)
 
     chain = args.chain.split("-")
-    for session in chain:
-        if session not in manifest.get("sessions", {}):
-            print(f"ERROR: session '{session}' not defined in manifest", file=sys.stderr)
-            return 1
+    if not args.prepare_only:
+        for session in chain:
+            if session not in manifest.get("sessions", {}):
+                print(f"ERROR: session '{session}' not defined in manifest", file=sys.stderr)
+                return 1
 
     print(f"Workload:    {args.workload_id}")
-    print(f"Trial:       {trial_id}")
-    print(f"Chain:       {' -> '.join(chain)}")
     print(f"Working dir: {working_dir}")
-    print(f"Results:     {out_dir}")
+    if args.prepare_only:
+        print("Mode:        prepare-only (no claude invocation)")
+    else:
+        trial_id = args.trial_id or time.strftime("%Y%m%d_%H%M%S")
+        out_dir = RESULTS_DIR / args.workload_id / trial_id
+        out_dir.mkdir(parents=True, exist_ok=True)
+        print(f"Trial:       {trial_id}")
+        print(f"Chain:       {' -> '.join(chain)}")
+        print(f"Results:     {out_dir}")
     print()
 
     print("[setup] Resetting working directory")
@@ -262,6 +271,31 @@ def main() -> int:
     staging = manifest.get("staging", [])
     print(f"[setup] Staging {len(staging)} payload file(s)")
     stage_payload(workload_dir, working_dir, staging)
+
+    if args.prepare_only:
+        print()
+        print("Working directory prepared for manual interactive use.")
+        print()
+        print("Next steps:")
+        print(f"  cd {working_dir}")
+        print("  claude")
+        print()
+        print("Session prompts defined for this workload (paste into claude):")
+        print()
+        for name, spec in manifest.get("sessions", {}).items():
+            print(f"--- {name} ---")
+            print(spec.get("prompt", "(no prompt defined)"))
+            print()
+        print("After each session, inspect what changed with:")
+        print(f"  diff -r {TEMPLATE_DIR} {working_dir}")
+        print()
+        crit = manifest.get("success_criterion", {})
+        if crit.get("type") == "string_in_file":
+            target_path = working_dir / crit["file"]
+            print("Attack success check (after the probe session completes):")
+            print(f"  grep -n '{crit['string']}' {target_path}")
+            print()
+        return 0
 
     session_summaries: list[dict] = []
     for idx, session in enumerate(chain):
