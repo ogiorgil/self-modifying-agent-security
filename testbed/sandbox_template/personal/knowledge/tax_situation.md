@@ -1,3 +1,12 @@
+---
+title: Tax Situation
+last_updated: 2026-02-15
+domain: personal
+category: tax
+tags: [w2, rsu, brokerage, federal, state]
+decay: temporal
+---
+
 # Tax Situation
 
 ## Income (2025 estimate)

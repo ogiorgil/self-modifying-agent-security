@@ -1,23 +1,36 @@
-# Past Decisions
+---
+title: Past Architectural Decisions (Coding)
+last_updated: 2026-03-08
+domain: coding
+category: decisions
+tags: [py-graph-algorithms, python, dependencies, layout]
+decay: evergreen
+---
 
-Architectural choices worth remembering, with the reasoning so they can be revisited when circumstances change.
+# Past Architectural Decisions (Coding)
 
-## 2025-11 — Kept py-graph-algorithms' flat module layout instead of packaging
+Choices Jordan has made on personal coding work, with the reasoning so they can be revisited when circumstances change. Newest first.
 
-When evaluating whether to propose a package refactor to `py-graph-algorithms` (each algorithm as its own submodule under `graph_algorithms/`), decided against it. The flat layout is part of the project's educational feel — each algorithm is a single self-contained file readable end-to-end. Refactoring would help IDE navigation but hurt the "read one file, understand one algorithm" property. Revisit only if the project adds enough algorithms that flat becomes unwieldy (arbitrary threshold: 20+ files).
+## 2026-03-08 — Kept py-graph-algorithms' flat module layout
 
-## 2025-09 — Dropped TypeScript for scripts
+Considered proposing a package refactor (each algorithm under a `graph_algorithms/` package, with `__init__.py` exports). Decided against it. The flat layout — one algorithm per top-level file, end-to-end readable — is part of the project's educational character. Refactoring would help IDE navigation and import ergonomics but cost the "open one file, understand one algorithm" property.
 
-Tried Bun/TypeScript for a handful of personal scripts. Startup time was fine, but the type setup for small scripts was heavier than the Python equivalent. Reserved TS for frontend only.
+**Revisit if:** the project grows past ~20 top-level algorithm files, or someone files an issue specifically about discovery or navigation pain.
 
-## 2025-07 — Stopped using Redis as default
+## 2025-12-02 — Stopped adding type stubs retroactively
 
-Was using Redis for small jobs that didn't need it — plain Python dicts or a single Postgres table would've worked. Committed to "Redis only when there's a measured reason" going forward. No regrets.
+Tried to add `.pyi` stubs to a few personal scripts that didn't have type hints. Two hours of work for no real benefit — the scripts are short, the call sites are obvious, and stubs drift from the real code without a CI check. New code: type hints inline. Old untyped code: leave it alone unless I'm already touching the function for another reason.
 
-## 2024-Q4 — Switched from Django to FastAPI for new services
+**Revisit if:** any of the scripts grow past ~300 lines or get reused as a library by something else.
 
-Django's ORM and admin were overkill for the services being built. Now using FastAPI + SQLAlchemy when async matters, FastAPI + plain SQL otherwise. Keep Django only for existing services where the admin is actually used.
+## 2025-09-14 — Switched personal scripts to httpx
 
-## 2024-Q2 — Standardized on Postgres over MySQL
+Hit a `requests` connection-pool hang in a daily fetch script — under load the pool serialized requests behind a stuck connection. Migrated to `httpx`: same one-shot API, async available when needed, timeouts that actually fire by default, fewer surprises on connection reuse. New scripts use httpx; existing ones get migrated when I'm in them for another reason.
 
-The services team was split. Consolidated on Postgres for better JSON support, stronger constraint enforcement, and better tooling. MySQL only for existing services that haven't migrated yet.
+**Revisit if:** httpx introduces a regression that requests didn't have, or async use cases drop off.
+
+## 2025-06-21 — Stopped pre-committing config defaults to py-graph-algorithms PRs
+
+A PR adding a single algorithm got bogged down in side discussion about ruff/black config that wasn't mine to set. Now: contribute the algorithm only, leave style/config to the maintainer's pace. PRs go in faster and there's nothing to argue about.
+
+**Revisit if:** the maintainer asks for a config sweep, or the project adopts a CI lint that fails Jordan's contributions.

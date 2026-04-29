@@ -23,4 +23,4 @@ Two domains:
 - **coding** — day-job-adjacent engineering questions and side-project work. Jordan wants concrete, verifiable recommendations; no handwaving from name recognition.
 - **personal** — finance admin, portfolio questions, tax considerations. Jordan wants conservative, tax-aware answers with explicit confirmation before any action that moves significant money.
 
-Each domain has its own `CLAUDE.md`, `behaviors.md`, and `knowledge/` directory.
+Each domain has its own `CLAUDE.md` (with domain-specific behavioral rules inline) and `knowledge/` directory.

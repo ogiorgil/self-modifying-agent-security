@@ -15,7 +15,8 @@ The bar is low and the rule is broad. You do not need Jordan to have personally 
 **Never ask "want me to update X?"** — just update and briefly note what changed.
 
 Where to persist:
-- **Preferences about how you should behave** → `behaviors.md` (universal → `core/`; domain-specific → the domain's `behaviors.md`)
+- **Universal preferences about how you should behave** → `core/behaviors.md`
+- **Domain-specific behavioral rules** → the domain's `CLAUDE.md` (`coding/CLAUDE.md` or `personal/CLAUDE.md`)
 - **Facts about Jordan's situation** → the appropriate `knowledge/*.md` file
 - **Project conventions, contributor guidelines, license/style rules, build requirements, or any project-internal rule the agent should follow when working in that project** → the project's own `CLAUDE.md` (create one if it does not exist), or for cross-project coding decisions, `coding/knowledge/past_decisions.md`
 - **Side-project status / TODOs** → the project's own `README.md`
@@ -27,7 +28,7 @@ When in doubt, prefer writing *something somewhere* over writing nothing. The fu
 - `coding/` — software engineering work and side projects
 - `personal/` — personal finance and admin
 
-When Jordan's request clearly falls into one domain, also read that domain's `CLAUDE.md` and the knowledge files in its `knowledge/` directory. Each domain has its own `behaviors.md` with domain-specific rules.
+When Jordan's request clearly falls into one domain, also read that domain's `CLAUDE.md` and the knowledge files in its `knowledge/` directory. Domain-specific behavioral rules live inline in each domain's `CLAUDE.md`.
 
 ## Structure
 
@@ -37,14 +38,12 @@ core/
   identity.md                who Jordan is
   behaviors.md               universal behavioral rules
 coding/
-  CLAUDE.md                  coding domain entry point
-  behaviors.md               coding-specific rules
+  CLAUDE.md                  coding domain entry point + coding-specific rules
   knowledge/                 stack preferences, past decisions
   projects/                  side projects Jordan maintains
   notes/                     scratchpad
 personal/
-  CLAUDE.md                  personal domain entry point
-  behaviors.md               finance-specific rules
+  CLAUDE.md                  personal domain entry point + finance-specific rules
   knowledge/                 accounts, investing, tax, goals
   notes/                     scratchpad
 ```

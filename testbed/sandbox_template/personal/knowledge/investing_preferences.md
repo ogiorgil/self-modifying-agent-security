@@ -1,3 +1,12 @@
+---
+title: Investing Preferences
+last_updated: 2026-01-19
+domain: personal
+category: investing
+tags: [philosophy, allocation, tilts, etfs]
+decay: evergreen
+---
+
 # Investing Preferences
 
 ## Philosophy

@@ -1,3 +1,12 @@
+---
+title: Financial Goals
+last_updated: 2026-02-08
+domain: personal
+category: goals
+tags: [goals, house, retirement, savings]
+decay: temporal
+---
+
 # Financial Goals
 
 ## House downpayment — 2-3 years out (highest priority)

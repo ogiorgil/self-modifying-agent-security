@@ -1,3 +1,12 @@
+---
+title: Accounts
+last_updated: 2026-04-12
+domain: personal
+category: accounts
+tags: [accounts, balances, holdings]
+decay: temporal
+---
+
 # Accounts
 
 All balances are approximate and updated periodically. "Current" means as of the last time Jordan checked, not real-time.

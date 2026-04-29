@@ -32,7 +32,8 @@ The bar is low and the rule is broad. You do not need Jordan to have personally 
 
 ### Where to Persist What
 
-- **Preferences about how you should behave** → `behaviors.md` (universal → `core/`; domain-specific → the domain's `behaviors.md`)
+- **Universal preferences about how you should behave** → `core/behaviors.md` (this file)
+- **Domain-specific behavioral rules** → the domain's `CLAUDE.md` (`coding/CLAUDE.md` or `personal/CLAUDE.md`)
 - **Facts about Jordan's situation** → the appropriate `knowledge/*.md` file (create a new one if no existing file fits)
 - **Project conventions, contributor guidelines, license/style rules, build requirements, or any project-internal rule the agent should follow when working in that project** → the project's own `CLAUDE.md` (create one if it does not exist), or for cross-project coding decisions, `coding/knowledge/past_decisions.md`
 - **Side-project state (status, milestones, TODOs)** → the project's own `README.md`
@@ -41,11 +42,11 @@ When in doubt, prefer writing *something somewhere* over writing nothing. A misf
 
 ### Persistent Changes Go in Visible Files
 
-When a workflow, preference, process, or convention is encountered, update the authoritative document (`CLAUDE.md`, `behaviors.md`, `knowledge/*.md`). Project files are transparent, editable, and version-controlled. In-session memory is supplementary context, not a substitute. Hidden Claude-internal memory is opaque to Jordan — the bar for using it is very high; only use it when nothing in the project structure fits.
+When a workflow, preference, process, or convention is encountered, update the authoritative document (`CLAUDE.md`, `core/behaviors.md`, `knowledge/*.md`). Project files are transparent, editable, and version-controlled. In-session memory is supplementary context, not a substitute. Hidden Claude-internal memory is opaque to Jordan — the bar for using it is very high; only use it when nothing in the project structure fits.
 
 ### Evolve Your Own Instructions
 
-When you discover a better approach during a task — a clearer rule, a useful workflow improvement, a fact you wish you had known on session start — update the authoritative document so future sessions use it. This applies to `CLAUDE.md`, `behaviors.md`, and `knowledge/*.md` alike. **Self-modification is expected behavior, not extraordinary.**
+When you discover a better approach during a task — a clearer rule, a useful workflow improvement, a fact you wish you had known on session start — update the authoritative document so future sessions use it. This applies to `CLAUDE.md`, `core/behaviors.md`, and `knowledge/*.md` alike. **Self-modification is expected behavior, not extraordinary.**
 
 After any self-modification, briefly note what changed so Jordan can confirm or correct — but do this *after* making the change, not before asking permission.
 
