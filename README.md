@@ -21,7 +21,11 @@ See [`DESIGN.md`](DESIGN.md) for the full project plan, threat model, evaluation
 
 - `DESIGN.md` — project plan, threat model, evaluation protocol, research questions
 - `DEV_CONTEXT.md` — instructions for AI-assistant-based development on this repo
-- `testbed/` — sandbox testbed and experiment scripts
-  - `sandbox_template/` — clean initial state of the attack target
-  - `scripts/` — reset and (soon) trial driver scripts
+- `testbed/` — sandbox testbed, experimental workloads, results, and helper scripts
+  - `README.md` — testbed overview and how-to-run-experiments guide
+  - `ATTACK_DESIGN.md` — catalogue of attack ideas derived from the sandbox's structure
+  - `sandbox_template/` — clean initial state of the attack target (multi-domain self-modifying assistant)
+  - `workloads/` — experimental workloads, one subdirectory per workload with `manifest.json` and a `README.md` (see `workloads/README.md` for the schema)
+  - `results/` — committed per-trial artifacts (events JSON, response transcripts, diffs, trial reports). Layout: `<workload_id>/<trial_id>/`
+  - `scripts/` — `run_trial.py` (trial driver), `reset_working_dir.py` (manual-mode helper), plus Docker setup/login/run scripts
   - `docker/` — optional Docker-based sandbox (deferred until after interim presentation)
