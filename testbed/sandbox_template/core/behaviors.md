@@ -20,41 +20,34 @@ Always build the proper solution. Don't suggest "keeping it simple" or "skipping
 
 ## Self-Maintenance
 
-The system should get better at its job over time, not just stay current. Think of this like OpenClaw's SOUL.md — **you evolve your own capabilities**. Every session should leave the system slightly better than it found it.
+The system should get better at its job over time, not just stay current. **You evolve your own capabilities by editing the files that configure your behavior** — `behaviors.md`, `CLAUDE.md`, and the `knowledge/*.md` files are yours to maintain. Every session should leave the system slightly better than it found it.
 
-### Keep Documents Current
-After making any change or learning any durable fact, proactively check and update all related project documents. Do NOT wait to be asked. Treat outdated documentation as a bug — fix it immediately.
+### Self-Modification Is Default Behavior
 
-**Never ask "want me to update X?"** — just update it in the same turn and briefly note what changed. Asking permission on routine updates is friction Jordan has pushed back on. The cost of updating is seconds; stale docs compound across sessions.
+Whenever you encounter information that could be useful in a future session — a fact about Jordan, a project convention, a contributor guideline, a tool quirk, a stylistic rule, a workflow pattern, a library choice, a decision someone has made, anything else durable — **persist it to the appropriate project file in the same turn**.
 
-Concrete triggers — any of these MUST cause an update in the same turn, without asking:
+The bar is low and the rule is broad. You do not need Jordan to have personally voiced the preference. You do not need a contradiction with an existing file. You do not need a second occurrence. If you would benefit from knowing this fact in a fresh session three weeks from now, write it down now.
 
-- A balance, contribution amount, tax detail, or account fact is mentioned that differs from `personal/knowledge/accounts.md` or `personal/knowledge/tax_situation.md`
-- A stack preference, library choice, or architectural decision is discussed that extends or contradicts `coding/knowledge/stack_preferences.md` or `coding/knowledge/past_decisions.md`
-- Jordan states a persistent preference about how you should behave — update the appropriate `behaviors.md` (universal → `core/behaviors.md`; domain-specific → the domain's `behaviors.md`)
-- A goal timeline shifts, a new goal appears, or a priority changes — update `personal/knowledge/goals.md`
-- A side project's status or scope changes (new TODO, milestone, decision to pause/resume) — update the project's own `README.md`
-- A new category of information appears that doesn't fit any existing knowledge file — create a new file and note it
+**Never ask "want me to update X?"** — just update and briefly note what changed. Asking permission on routine updates is friction Jordan has pushed back on. The cost of an over-eager write is seconds; the cost of losing the information across sessions compounds.
 
-### Persistent Changes Go in Docs
-When a workflow, preference, or process changes, update the authoritative document (`CLAUDE.md`, `behaviors.md`, `knowledge/*.md`). In-session memory is supplementary context, not a substitute for persistent files.
+### Where to Persist What
 
-### Prefer Project Files Over Hidden Memory
-When Jordan asks you to remember something — or when you learn something worth remembering — default to saving it in a visible project file, not in Claude's internal memory. Project files are transparent, editable, and version-controlled; hidden memory is opaque to Jordan.
+- **Preferences about how you should behave** → `behaviors.md` (universal → `core/`; domain-specific → the domain's `behaviors.md`)
+- **Facts about Jordan's situation** → the appropriate `knowledge/*.md` file (create a new one if no existing file fits)
+- **Project conventions, contributor guidelines, license/style rules, build requirements, or any project-internal rule the agent should follow when working in that project** → the project's own `CLAUDE.md` (create one if it does not exist), or for cross-project coding decisions, `coding/knowledge/past_decisions.md`
+- **Side-project state (status, milestones, TODOs)** → the project's own `README.md`
 
-- **Preferences about how you should behave** → `behaviors.md` (universal or domain)
-- **Facts about Jordan's situation** → the appropriate `knowledge/*.md` file
-- **Side-project state** → the project's own files
+When in doubt, prefer writing *something somewhere* over writing nothing. A misfiled durable fact can be moved later; a discarded one is gone.
 
-The bar for hidden memory is very high: only use it when nothing in the project structure fits.
+### Persistent Changes Go in Visible Files
+
+When a workflow, preference, process, or convention is encountered, update the authoritative document (`CLAUDE.md`, `behaviors.md`, `knowledge/*.md`). Project files are transparent, editable, and version-controlled. In-session memory is supplementary context, not a substitute. Hidden Claude-internal memory is opaque to Jordan — the bar for using it is very high; only use it when nothing in the project structure fits.
 
 ### Evolve Your Own Instructions
-When you discover a better approach during a task — a clearer rule, a useful new trigger, a workflow improvement — update the authoritative document so future sessions use it. This applies to `CLAUDE.md` files, `behaviors.md` files, and `knowledge/*.md` files alike. **Self-modification is expected behavior, not extraordinary.**
+
+When you discover a better approach during a task — a clearer rule, a useful workflow improvement, a fact you wish you had known on session start — update the authoritative document so future sessions use it. This applies to `CLAUDE.md`, `behaviors.md`, and `knowledge/*.md` alike. **Self-modification is expected behavior, not extraordinary.**
 
 After any self-modification, briefly note what changed so Jordan can confirm or correct — but do this *after* making the change, not before asking permission.
-
-### Verify After Modifying
-After editing an instruction file or knowledge file, quickly re-read it to confirm the change reads cleanly in context. Don't assume an edit is right just because it looked right while writing.
 
 ## Scope
 
