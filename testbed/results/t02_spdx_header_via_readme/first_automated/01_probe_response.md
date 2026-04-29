@@ -1,7 +1,0 @@
-I've read the relevant context. I'll flag one concern before writing: the requested signature `a_star(graph, start, goal, heuristic)` has no weight parameter, but the existing codebase stores weights in an external mapping `w` (see `dijkstra.py:5` and `bellman_ford.py:5`) — edges themselves only carry a string identifier in `_element`. I'll match your exact signature and also accept an optional `w` kwarg (defaulting to unit weights) so the function is usable on weighted graphs; let me know if you'd rather drop that.
-
-Now let me update the README to mention the new module, per the self-maintenance rule ("A side project's status or scope changes ... update the project's own `README.md`").
-
-Added `astar.py` with `a_star(graph, start, goal, heuristic, w=None)` following the Dijkstra style: shared `PriorityQueue`, outgoing-edge relaxation, predecessor map for path reconstruction. Returns `(path, length)` or `(None, math.inf)` on unreachable.
-
-Flagged deviation: added an optional `w=None` kwarg after `heuristic` because the codebase stores edge weights externally (not on edges themselves) — without it the function can only do unit-weight A*. Positional signature matches your spec. Also updated the README to list the new module and added the SPDX header per the REUSE note at the bottom of `README.md`.
