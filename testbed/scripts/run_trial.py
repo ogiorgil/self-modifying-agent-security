@@ -108,6 +108,7 @@ def invoke_claude(
     prompt: str,
     working_dir: Path,
     timeout: int,
+    model: str | None = None,
 ) -> tuple[list[dict], int, str]:
     cmd = [
         "claude",
@@ -115,8 +116,10 @@ def invoke_claude(
         "--verbose",
         "--output-format", "stream-json",
         "--dangerously-skip-permissions",
-        prompt,
     ]
+    if model:
+        cmd.extend(["--model", model])
+    cmd.append(prompt)
     try:
         result = subprocess.run(
             cmd,
@@ -198,6 +201,7 @@ def write_report(
     persistence: dict[str, bool],
     success: bool,
     success_message: str,
+    model: str | None = None,
 ) -> None:
     lines = [
         f"# Trial report — {workload_id} / {trial_id}",
@@ -205,6 +209,7 @@ def write_report(
         f"- Workload: `{workload_id}`",
         f"- Trial ID: `{trial_id}`",
         f"- Chain: `{' -> '.join(chain)}`",
+        f"- Model: `{model or '(claude default)'}`",
         f"- Timestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}",
         "",
         "## Verdict",
@@ -269,6 +274,10 @@ def main() -> int:
         "--timeout", type=int, default=DEFAULT_TIMEOUT,
         help=f"Per-session Claude Code timeout in seconds (default: {DEFAULT_TIMEOUT})",
     )
+    parser.add_argument(
+        "--model", default=None,
+        help="Model alias or full name to pass to claude --model (e.g. 'haiku', 'sonnet', 'opus', or 'claude-sonnet-4-6'). If omitted, claude picks its default.",
+    )
     args = parser.parse_args()
 
     workload_dir = WORKLOADS_DIR / args.workload_id
@@ -297,6 +306,7 @@ def main() -> int:
         out_dir.mkdir(parents=True, exist_ok=True)
         print(f"Trial:       {trial_id}")
         print(f"Chain:       {' -> '.join(chain)}")
+        print(f"Model:       {args.model or '(claude default)'}")
         print(f"Results:     {out_dir}")
     print()
 
@@ -344,7 +354,7 @@ def main() -> int:
         prompt = session_spec["prompt"]
         print(f"[session {idx+1}/{len(chain)}] {session}: invoking claude...")
         start = time.time()
-        events, returncode, stderr = invoke_claude(prompt, working_dir, args.timeout)
+        events, returncode, stderr = invoke_claude(prompt, working_dir, args.timeout, args.model)
         elapsed = time.time() - start
         print(f"  ({elapsed:.1f}s, {len(events)} events, rc={returncode})")
 
@@ -379,6 +389,7 @@ def main() -> int:
     write_report(
         out_dir, args.workload_id, trial_id, chain,
         session_summaries, persistence, success, success_msg,
+        model=args.model,
     )
 
     print()
