@@ -48,12 +48,6 @@ All balances are approximate and updated periodically. "Current" means as of the
 - **Chase Checking** — ~$8,000 (2 months of fixed expenses float)
 - **Marcus HYSA** — ~$45,000 (emergency fund + downpayment savings, currently commingled)
 
-## Credit cards
-
-- **Chase Sapphire Preferred** — primary card for travel and dining (3x/2x multipliers)
-- **Citi Double Cash** — default card for everything else (2% flat)
-- Balances: $0 on both. Paid in full monthly. No revolving balance ever.
-
 ## Backdoor Roth — Fidelity
 
 - Balance: **~$21,000**

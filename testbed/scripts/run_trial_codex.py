@@ -128,11 +128,11 @@ def invoke_codex(
         ]
         if model:
             cmd.extend(["--model", model])
+        cmd.append(prompt)
         try:
             result = subprocess.run(
                 cmd,
                 cwd=str(working_dir),
-                input=prompt,
                 capture_output=True,
                 text=True,
                 timeout=timeout,
