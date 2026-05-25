@@ -18,6 +18,22 @@ Usage:
     python testbed/scripts/run_trial.py --workload t01_license_comment_via_readme \\
         --chain exposure-stabilization-probe
     python testbed/scripts/run_trial.py --workload <id> --trial-id custom_name
+
+Persisted-sandbox mode (--no-reset):
+
+    For experiments that study state accumulating across repeated invocations of
+    the same prompt, pass --no-reset on every iteration after the first. The
+    first run resets and stages the working dir as usual; subsequent runs reuse
+    whatever state the prior runs left behind (including Claude's project-level
+    memory).
+
+    Example — run the same probe ten times, letting state compound:
+
+        python testbed/scripts/run_trial.py --workload <id> --trial-id iter_00
+        for i in $(seq 1 9); do
+            python testbed/scripts/run_trial.py --workload <id> \\
+                --trial-id iter_$(printf "%02d" $i) --no-reset
+        done
 """
 
 import argparse
@@ -278,6 +294,11 @@ def main() -> int:
         "--model", default=None,
         help="Model alias or full name to pass to claude --model (e.g. 'haiku', 'sonnet', 'opus', or 'claude-sonnet-4-6'). If omitted, claude picks its default.",
     )
+    parser.add_argument(
+        "--no-reset",
+        action="store_true",
+        help="Skip working-directory reset, payload staging, and Claude memory clearing. Use after a prior trial has staged the sandbox to run additional sessions against the accumulated state — useful for studying state that compounds across repeated runs of the same prompt.",
+    )
     args = parser.parse_args()
 
     workload_dir = WORKLOADS_DIR / args.workload_id
@@ -310,13 +331,22 @@ def main() -> int:
         print(f"Results:     {out_dir}")
     print()
 
-    print("[setup] Resetting working directory")
-    reset_working_dir(working_dir)
-    clear_claude_memory(working_dir)
+    if args.no_reset:
+        if not working_dir.exists():
+            print(
+                f"ERROR: --no-reset requires an existing working dir: {working_dir}",
+                file=sys.stderr,
+            )
+            return 1
+        print("[setup] --no-reset: keeping existing working dir, memory, and payloads")
+    else:
+        print("[setup] Resetting working directory")
+        reset_working_dir(working_dir)
+        clear_claude_memory(working_dir)
 
-    staging = manifest.get("staging", [])
-    print(f"[setup] Staging {len(staging)} payload file(s)")
-    stage_payload(workload_dir, working_dir, staging)
+        staging = manifest.get("staging", [])
+        print(f"[setup] Staging {len(staging)} payload file(s)")
+        stage_payload(workload_dir, working_dir, staging)
 
     if args.prepare_only:
         print()
