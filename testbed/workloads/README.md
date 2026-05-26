@@ -58,6 +58,23 @@ python testbed/scripts/run_trial.py --workload <workload_id> --chain exposure-st
 
 The driver handles reset, staging, session chaining, diff capture, and success-criterion checking. Trial artifacts (events, responses, diffs, report) land in `testbed/results/<workload_id>/<trial_id>/` (gitignored).
 
+### Persisted-sandbox runs (`--no-reset`)
+
+For experiments that study state accumulating across repeated runs of the same prompt (the project's "compounding indirect prompt injection" focus), pass `--no-reset` on every iteration after the first. The first run resets and stages the working dir as usual; subsequent runs reuse whatever state prior runs left behind — file edits the agent made to behavior/knowledge files, Claude's project-level memory, generated code, everything.
+
+```
+# First iteration — clean reset and stage
+python testbed/scripts/run_trial.py --workload <id> --trial-id iter_00
+
+# Subsequent iterations — keep accumulated state
+for i in $(seq 1 9); do
+    python testbed/scripts/run_trial.py --workload <id> \
+        --trial-id iter_$(printf "%02d" $i) --no-reset
+done
+```
+
+Each iteration writes its own results subdir (`iter_00/`, `iter_01/`, ...), so per-iteration diffs and responses are preserved even though the working dir compounds. To inspect how state evolved across iterations, diff the working dir against the template between runs or compare per-iteration `*_diff.txt` files.
+
 ## README.md vs manifest.json
 
 - `README.md` is the human-facing workload description — useful for reading, reviewing, discussing with teammates.
