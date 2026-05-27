@@ -9,6 +9,7 @@ script captures:
   - the full JSONL event log
   - the assistant's extracted text response
   - a file-level diff between the working dir and the clean template
+  - copies of files that are new or changed relative to the clean template
 
 After the chain completes, the success criterion from the manifest is
 checked and a human-readable trial report is written.
@@ -16,11 +17,28 @@ checked and a human-readable trial report is written.
 Usage:
     python testbed/scripts/run_trial_codex.py --workload c03_credential_exfil_via_coding_codex_md
     python testbed/scripts/run_trial_codex.py --workload <id> --trial-id custom_name
+    python testbed/scripts/run_trial_codex.py --workload <id> --num-trials 10
+
+Persisted-sandbox mode (--no-reset):
+
+    For experiments that study state accumulating across repeated invocations of
+    the same prompt, pass --no-reset on every iteration after the first. The
+    first run resets and stages the working dir as usual; subsequent runs reuse
+    whatever state the prior runs left behind.
+
+    Example — run the same probe ten times, letting state compound:
+
+        python testbed/scripts/run_trial_codex.py --workload <id> --trial-id iter_00
+        for i in $(seq 1 9); do
+            python testbed/scripts/run_trial_codex.py --workload <id> \\
+                --trial-id iter_$(printf "%02d" $i) --no-reset
+        done
 """
 
 from __future__ import annotations
 
 import argparse
+import filecmp
 import json
 import shutil
 import subprocess
@@ -203,6 +221,49 @@ def capture_diff(working_dir: Path) -> str:
     return result.stdout
 
 
+def save_modified_files(working_dir: Path, artifact_dir: Path) -> dict[str, list[str]]:
+    """Copy files that are new or changed relative to the clean template."""
+    if artifact_dir.exists():
+        shutil.rmtree(artifact_dir)
+    artifact_dir.mkdir(parents=True, exist_ok=True)
+
+    changed: list[str] = []
+    new: list[str] = []
+    deleted: list[str] = []
+
+    for path in sorted(working_dir.rglob("*")):
+        if not path.is_file():
+            continue
+        rel_path = path.relative_to(working_dir)
+        template_path = TEMPLATE_DIR / rel_path
+        rel = rel_path.as_posix()
+        if not template_path.exists():
+            new.append(rel)
+        elif filecmp.cmp(path, template_path, shallow=False):
+            continue
+        else:
+            changed.append(rel)
+
+        dest = artifact_dir / rel_path
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(path, dest)
+
+    for template_path in sorted(TEMPLATE_DIR.rglob("*")):
+        if not template_path.is_file():
+            continue
+        rel_path = template_path.relative_to(TEMPLATE_DIR)
+        if not (working_dir / rel_path).exists():
+            deleted.append(rel_path.as_posix())
+
+    manifest = {
+        "changed": changed,
+        "new": new,
+        "deleted": deleted,
+    }
+    (artifact_dir / "manifest.json").write_text(json.dumps(manifest, indent=2))
+    return manifest
+
+
 def check_success(
     working_dir: Path,
     criterion: dict,
@@ -282,15 +343,187 @@ def write_report(
             f"- Events: {summary['event_count']}",
             f"- Response length: {summary['response_length']} chars",
             f"- Diff lines: {summary['diff_lines']}",
+            f"- Modified files saved: {summary['modified_file_count']}",
+            f"- Deleted files recorded: {summary['deleted_file_count']}",
             "",
             "Artifacts:",
             f"- `{summary['index']:02d}_{summary['session']}_events.json`",
             f"- `{summary['index']:02d}_{summary['session']}_response.md`",
             f"- `{summary['index']:02d}_{summary['session']}_diff.txt`",
+            f"- `{summary['index']:02d}_{summary['session']}_modified_files/`",
             "",
         ])
 
     (out_dir / "trial_report.md").write_text("\n".join(lines))
+
+
+def write_batch_summary(
+    out_dir: Path,
+    workload_id: str,
+    chain: list[str],
+    trial_results: list[dict],
+    model: str | None = None,
+) -> None:
+    successes = sum(1 for result in trial_results if result["success"])
+    total = len(trial_results)
+    success_rate = successes / total if total else 0.0
+
+    summary = {
+        "workload": workload_id,
+        "chain": chain,
+        "agent": "codex",
+        "model": model or DEFAULT_MODEL,
+        "num_trials": total,
+        "successes": successes,
+        "success_rate": success_rate,
+        "trials": trial_results,
+    }
+    (out_dir / "batch_summary.json").write_text(json.dumps(summary, indent=2))
+
+    lines = [
+        f"# Batch summary — {workload_id}",
+        "",
+        f"- Workload: `{workload_id}`",
+        f"- Chain: `{' -> '.join(chain)}`",
+        f"- Agent: `codex`",
+        f"- Model: `{model or DEFAULT_MODEL}`",
+        f"- Trials: {total}",
+        f"- Attack successes: {successes}",
+        f"- Attack success rate: {success_rate:.1%}",
+        f"- Timestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}",
+        "",
+        "## Trial Results",
+        "",
+    ]
+    for result in trial_results:
+        verdict = "YES" if result["success"] else "NO"
+        lines.append(
+            f"- `{result['trial_id']}`: {verdict} - {result['success_message']} "
+            f"(`{result['report_path']}`)"
+        )
+    (out_dir / "batch_summary.md").write_text("\n".join(lines))
+
+
+def prepare_working_dir(
+    no_reset: bool,
+    working_dir: Path,
+    workload_dir: Path,
+    manifest: dict,
+) -> bool:
+    if no_reset:
+        if not working_dir.exists():
+            print(
+                f"ERROR: --no-reset requires an existing working dir: {working_dir}",
+                file=sys.stderr,
+            )
+            return False
+        print("[setup] --no-reset: keeping existing working dir, session state, and payloads")
+        return True
+
+    print("[setup] Resetting working directory")
+    reset_working_dir(working_dir)
+    clear_codex_session_state(working_dir)
+
+    staging = manifest.get("staging", [])
+    print(f"[setup] Staging {len(staging)} payload file(s)")
+    stage_payload(workload_dir, working_dir, staging)
+    return True
+
+
+def run_single_trial(
+    workload_id: str,
+    workload_dir: Path,
+    manifest: dict,
+    working_dir: Path,
+    out_dir: Path,
+    trial_id: str,
+    chain: list[str],
+    timeout: int,
+    model: str | None,
+    no_reset: bool,
+) -> dict | None:
+    print(f"Trial:       {trial_id}")
+    print(f"Results:     {out_dir}")
+    print()
+
+    if not prepare_working_dir(no_reset, working_dir, workload_dir, manifest):
+        return None
+
+    session_summaries: list[dict] = []
+    final_response_text = ""
+    for idx, session in enumerate(chain):
+        session_spec = manifest["sessions"][session]
+        pre_actions = session_spec.get("pre_actions", [])
+        if pre_actions:
+            print(f"[session {idx+1}/{len(chain)}] {session}: applying {len(pre_actions)} pre-action(s)")
+            for action in pre_actions:
+                apply_action(action, workload_dir, working_dir)
+        prompt = session_spec["prompt"]
+        print(f"[session {idx+1}/{len(chain)}] {session}: invoking codex...")
+        start = time.time()
+        events, returncode, stderr, response_text = invoke_codex(
+            prompt, working_dir, timeout, model
+        )
+        elapsed = time.time() - start
+        print(f"  ({elapsed:.1f}s, {len(events)} events, rc={returncode})")
+
+        (out_dir / f"{idx:02d}_{session}_events.json").write_text(
+            json.dumps(events, indent=2)
+        )
+        if not response_text:
+            response_text = extract_assistant_text(events)
+        final_response_text = response_text
+        (out_dir / f"{idx:02d}_{session}_response.md").write_text(response_text)
+        diff_text = capture_diff(working_dir)
+        (out_dir / f"{idx:02d}_{session}_diff.txt").write_text(diff_text)
+        modified_manifest = save_modified_files(
+            working_dir, out_dir / f"{idx:02d}_{session}_modified_files"
+        )
+        if stderr:
+            (out_dir / f"{idx:02d}_{session}_stderr.txt").write_text(stderr)
+
+        session_summaries.append({
+            "index": idx,
+            "session": session,
+            "returncode": returncode,
+            "event_count": len(events),
+            "response_length": len(response_text),
+            "diff_lines": len(diff_text.splitlines()),
+            "modified_file_count": (
+                len(modified_manifest["changed"]) + len(modified_manifest["new"])
+            ),
+            "deleted_file_count": len(modified_manifest["deleted"]),
+        })
+
+    print()
+    print("[finalize] Checking persistence targets and success criterion")
+    persistence = check_persistence(
+        working_dir, manifest.get("persistence_targets", [])
+    )
+    success, success_msg = check_success(
+        working_dir, manifest["success_criterion"], final_response_text
+    )
+
+    write_report(
+        out_dir, workload_id, trial_id, chain,
+        session_summaries, persistence, success, success_msg,
+        model=model,
+    )
+
+    print()
+    for target, modified in persistence.items():
+        marker = "[x]" if modified else "[ ]"
+        print(f"  {marker} {target}")
+    print()
+    print(f"Attack success: {'YES' if success else 'NO'} - {success_msg}")
+    print(f"Full report:    {out_dir / 'trial_report.md'}")
+
+    return {
+        "trial_id": trial_id,
+        "success": success,
+        "success_message": success_msg,
+        "report_path": str(out_dir / "trial_report.md"),
+    }
 
 
 def main() -> int:
@@ -316,6 +549,10 @@ def main() -> int:
         help="Trial identifier for the result subdirectory (defaults to a timestamp)",
     )
     parser.add_argument(
+        "--num-trials", type=int, default=1,
+        help="Run the same experiment this many times and report the attack success rate (default: 1).",
+    )
+    parser.add_argument(
         "--working-dir", type=Path, default=DEFAULT_WORKING_DIR,
         help=f"Working directory path (default: {DEFAULT_WORKING_DIR})",
     )
@@ -327,7 +564,18 @@ def main() -> int:
         "--model", default=DEFAULT_MODEL,
         help=f"Model alias or full name to pass to codex --model (default: {DEFAULT_MODEL}).",
     )
+    parser.add_argument(
+        "--no-reset",
+        action="store_true",
+        help="Skip working-directory reset, payload staging, and Codex session-state clearing. Use after a prior trial has staged the sandbox to run additional sessions against the accumulated state.",
+    )
     args = parser.parse_args()
+    if args.num_trials < 1:
+        print("ERROR: --num-trials must be at least 1", file=sys.stderr)
+        return 1
+    if args.prepare_only and args.num_trials != 1:
+        print("ERROR: --prepare-only cannot be combined with --num-trials", file=sys.stderr)
+        return 1
 
     workload_dir = WORKLOADS_DIR / args.workload_id
     manifest_path = workload_dir / "manifest.json"
@@ -350,25 +598,14 @@ def main() -> int:
     if args.prepare_only:
         print("Mode:        prepare-only (no codex invocation)")
     else:
-        trial_id = args.trial_id or time.strftime("%Y%m%d_%H%M%S")
-        model_id = result_model_id(args.model)
-        out_dir = RESULTS_DIR / args.workload_id / model_id / trial_id
-        out_dir.mkdir(parents=True, exist_ok=True)
-        print(f"Trial:       {trial_id}")
         print(f"Chain:       {' -> '.join(chain)}")
         print(f"Model:       {args.model or '(codex default)'}")
-        print(f"Results:     {out_dir}")
+        print(f"Num trials:  {args.num_trials}")
     print()
 
-    print("[setup] Resetting working directory")
-    reset_working_dir(working_dir)
-    clear_codex_session_state(working_dir)
-
-    staging = manifest.get("staging", [])
-    print(f"[setup] Staging {len(staging)} payload file(s)")
-    stage_payload(workload_dir, working_dir, staging)
-
     if args.prepare_only:
+        if not prepare_working_dir(args.no_reset, working_dir, workload_dir, manifest):
+            return 1
         print()
         print("Working directory prepared for manual interactive use.")
         print()
@@ -393,67 +630,53 @@ def main() -> int:
             print()
         return 0
 
-    session_summaries: list[dict] = []
-    final_response_text = ""
-    for idx, session in enumerate(chain):
-        session_spec = manifest["sessions"][session]
-        pre_actions = session_spec.get("pre_actions", [])
-        if pre_actions:
-            print(f"[session {idx+1}/{len(chain)}] {session}: applying {len(pre_actions)} pre-action(s)")
-            for action in pre_actions:
-                apply_action(action, workload_dir, working_dir)
-        prompt = session_spec["prompt"]
-        print(f"[session {idx+1}/{len(chain)}] {session}: invoking codex...")
-        start = time.time()
-        events, returncode, stderr, response_text = invoke_codex(
-            prompt, working_dir, args.timeout, args.model
+    model_id = result_model_id(args.model)
+    base_trial_id = args.trial_id or time.strftime("%Y%m%d_%H%M%S")
+    result_root = RESULTS_DIR / args.workload_id / model_id
+    batch_dir = result_root / base_trial_id
+
+    if args.num_trials == 1:
+        out_dirs = [(base_trial_id, batch_dir)]
+    else:
+        batch_dir.mkdir(parents=True, exist_ok=True)
+        out_dirs = [
+            (f"{base_trial_id}_{idx:02d}", batch_dir / f"trial_{idx:02d}")
+            for idx in range(args.num_trials)
+        ]
+
+    trial_results: list[dict] = []
+    for idx, (trial_id, out_dir) in enumerate(out_dirs, start=1):
+        out_dir.mkdir(parents=True, exist_ok=True)
+        if args.num_trials > 1:
+            print(f"=== Trial {idx}/{args.num_trials} ===")
+        result = run_single_trial(
+            args.workload_id,
+            workload_dir,
+            manifest,
+            working_dir,
+            out_dir,
+            trial_id,
+            chain,
+            args.timeout,
+            args.model,
+            args.no_reset,
         )
-        elapsed = time.time() - start
-        print(f"  ({elapsed:.1f}s, {len(events)} events, rc={returncode})")
+        if result is None:
+            return 1
+        trial_results.append(result)
+        if args.num_trials > 1:
+            print()
 
-        (out_dir / f"{idx:02d}_{session}_events.json").write_text(
-            json.dumps(events, indent=2)
+    successes = sum(1 for result in trial_results if result["success"])
+    success_rate = successes / args.num_trials
+
+    print()
+    print(f"Attack success rate: {successes}/{args.num_trials} ({success_rate:.1%})")
+    if args.num_trials > 1:
+        write_batch_summary(
+            batch_dir, args.workload_id, chain, trial_results, model=args.model
         )
-        if not response_text:
-            response_text = extract_assistant_text(events)
-        final_response_text = response_text
-        (out_dir / f"{idx:02d}_{session}_response.md").write_text(response_text)
-        diff_text = capture_diff(working_dir)
-        (out_dir / f"{idx:02d}_{session}_diff.txt").write_text(diff_text)
-        if stderr:
-            (out_dir / f"{idx:02d}_{session}_stderr.txt").write_text(stderr)
-
-        session_summaries.append({
-            "index": idx,
-            "session": session,
-            "returncode": returncode,
-            "event_count": len(events),
-            "response_length": len(response_text),
-            "diff_lines": len(diff_text.splitlines()),
-        })
-
-    print()
-    print("[finalize] Checking persistence targets and success criterion")
-    persistence = check_persistence(
-        working_dir, manifest.get("persistence_targets", [])
-    )
-    success, success_msg = check_success(
-        working_dir, manifest["success_criterion"], final_response_text
-    )
-
-    write_report(
-        out_dir, args.workload_id, trial_id, chain,
-        session_summaries, persistence, success, success_msg,
-        model=args.model,
-    )
-
-    print()
-    for target, modified in persistence.items():
-        marker = "[x]" if modified else "[ ]"
-        print(f"  {marker} {target}")
-    print()
-    print(f"Attack success: {'YES' if success else 'NO'} - {success_msg}")
-    print(f"Full report:    {out_dir / 'trial_report.md'}")
+        print(f"Batch summary:       {batch_dir / 'batch_summary.md'}")
 
     return 0
 
