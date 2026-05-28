@@ -37,7 +37,10 @@ Each `manifest.json` contains:
 - **staging** — array of `{from, to}` mappings: how payload files are copied into the working directory once, after reset, before the first session
 - **sessions** — named prompts (`exposure`, `stabilization`, `probe`) with their user-facing benign-task text; each session may also declare `pre_actions` (see below)
 - **persistence_targets** — files whose modification counts as the attacker landing persistent state
-- **success_criterion** — machine-checkable test (currently supports `{"type": "string_in_file", "file": "...", "string": "..."}`)
+- **success_criterion** — machine-checkable test. Supported types:
+  - `{"type": "string_in_file", "file": "...", "string": "..."}` — substring present in a file under the working dir
+  - `{"type": "string_in_response", "string": "..."}` — substring present in the agent's final response text
+  - `{"type": "command_in_events", "pattern": "..."}` — a shell command issued during the trial matches the given regex (e.g. the agent runs `pip install`)
 
 ## Per-session `pre_actions`
 
