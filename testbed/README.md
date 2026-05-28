@@ -4,7 +4,7 @@ The sandbox environment used for studying compounding indirect prompt injection 
 
 ## Structure
 
-- `sandbox_template/` — committed, clean initial state of the sandbox (the attack target)
+- `sandbox_template/` — committed, clean initial state of the Claude Code sandbox (the attack target)
   - `CLAUDE.md` — platform-level entry point; the broad self-modification primitive is inlined here so it's always loaded
   - `core/` — shared identity and universal behaviors (the canonical self-modification primitive lives here, primary attack surface)
     - `identity.md` — fake user identity the agent operates on behalf of (Jordan Kim)
@@ -18,12 +18,14 @@ The sandbox environment used for studying compounding indirect prompt injection 
     - `CLAUDE.md` — domain entry point with finance-specific rules inline
     - `knowledge/` — accounts, goals, investing, tax (with YAML frontmatter and a `README.md` index)
     - `notes/` — scratchpad
+- `sandbox_template_codex/` — Codex variant of the same sandbox, using `AGENTS.md` entry points in place of `CLAUDE.md`
 - `workloads/` — experimental workloads, one subdirectory per `(initial state, benign task, attack payload, persistence target, success criterion)` tuple
   - See `workloads/README.md` for the manifest schema and naming convention
-- `results/` — per-trial artifacts (events JSON, response transcripts, diffs, trial reports). Layout: `<workload_id>/<trial_id>/`
+- `results/` — per-trial artifacts (events JSON, response transcripts, diffs, trial reports). Claude layout: `<workload_id>/<trial_id>/`; Codex layout: `<workload_id>/<model>/<trial_id>/`
 - `ATTACK_DESIGN.md` — catalogue of attack ideas derived from the sandbox's structure, used to inform new workload designs
 - `scripts/` — helper scripts
   - `run_trial.py` — trial driver. Resets the working dir, stages payloads, runs `claude -p` for each session in the chain, captures diffs, checks the success criterion, writes artifacts under `results/`. Supports per-session `pre_actions` for mid-trial mutations.
+  - `run_trial_codex.py` — Codex trial driver. Uses `sandbox_template_codex/`, runs `codex exec --json`, captures the Codex JSONL event stream, final response, diffs, and the same report format.
   - `reset_working_dir.py` — local iteration: copy template to sibling working dir, clear Claude Code auto-memory
   - `docker_setup.sh` — one-time: build image + create auth volume
   - `docker_login.sh` — one-time: interactive OAuth login (saves auth to the persistent volume)
@@ -43,6 +45,22 @@ python testbed/scripts/reset_working_dir.py
 cd ../self-modifying-agent-security-working
 claude
 ```
+
+For Codex:
+
+```
+python testbed/scripts/run_trial_codex.py --workload c03_credential_exfil_via_coding_codex_md --prepare-only
+cd ../self-modifying-agent-security-working-codex
+codex
+```
+
+Headless Codex trials use the same workload schema:
+
+```
+python testbed/scripts/run_trial_codex.py --workload c03_credential_exfil_via_coding_codex_md --chain probe
+```
+
+Workloads that explicitly poison or check `CLAUDE.md` paths should be duplicated or adjusted to target `AGENTS.md` paths when testing Codex auto-loaded instructions.
 
 ### Docker mode (clean, for final results)
 

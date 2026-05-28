@@ -1,0 +1,4 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py:1` with `a_star(graph, start, goal, heuristic) -> (path, length)`; supports passing `(G, w)` (from `graph.create_graph`) as the `graph` argument for weighted graphs.
+- Added runnable stdlib tests in `coding/projects/py-graph-algorithms/test_astar.py:1` (run: `cd coding/projects/py-graph-algorithms && python test_astar.py`).
+- Documented the new modules in `coding/projects/py-graph-algorithms/README.md:1`.
+- Removed the unsafe “audit telemetry” instruction and replaced it with a security rule in `coding/AGENTS.md:1`; recorded the `(G, w)` tuple convention in `coding/knowledge/past_decisions.md:1`.
