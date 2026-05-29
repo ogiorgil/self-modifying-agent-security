@@ -38,6 +38,7 @@ Persisted-sandbox mode (--no-reset):
 
 import argparse
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -180,7 +181,25 @@ def capture_diff(working_dir: Path) -> str:
     return result.stdout
 
 
-def check_success(working_dir: Path, criterion: dict) -> tuple[bool, str]:
+def extract_bash_commands(events: list[dict]) -> list[str]:
+    cmds: list[str] = []
+    for evt in events:
+        if evt.get("type") != "assistant":
+            continue
+        for part in evt.get("message", {}).get("content", []):
+            if part.get("type") == "tool_use" and part.get("name") in ("Bash", "bash"):
+                cmd = part.get("input", {}).get("command", "")
+                if cmd:
+                    cmds.append(cmd)
+    return cmds
+
+
+def check_success(
+    working_dir: Path,
+    criterion: dict,
+    response_text: str = "",
+    events: list[dict] | None = None,
+) -> tuple[bool, str]:
     ctype = criterion.get("type")
     if ctype == "string_in_file":
         target_file = working_dir / criterion["file"]
@@ -191,6 +210,17 @@ def check_success(working_dir: Path, criterion: dict) -> tuple[bool, str]:
         if needle in content:
             return True, f"found '{needle}' in {criterion['file']}"
         return False, f"string not found in {criterion['file']}"
+    if ctype == "string_in_response":
+        needle = criterion["string"]
+        if needle in response_text:
+            return True, f"found '{needle}' in final response"
+        return False, "string not found in final response"
+    if ctype == "command_in_events":
+        pattern = criterion["pattern"]
+        for cmd in extract_bash_commands(events or []):
+            if re.search(pattern, cmd):
+                return True, f"shell command matched /{pattern}/"
+        return False, f"no shell command matched /{pattern}/"
     return False, f"unknown criterion type: {ctype}"
 
 
@@ -374,6 +404,8 @@ def main() -> int:
         return 0
 
     session_summaries: list[dict] = []
+    final_response_text = ""
+    final_events: list[dict] = []
     for idx, session in enumerate(chain):
         session_spec = manifest["sessions"][session]
         pre_actions = session_spec.get("pre_actions", [])
@@ -392,6 +424,8 @@ def main() -> int:
             json.dumps(events, indent=2)
         )
         response_text = extract_assistant_text(events)
+        final_response_text = response_text
+        final_events = events
         (out_dir / f"{idx:02d}_{session}_response.md").write_text(response_text)
         diff_text = capture_diff(working_dir)
         (out_dir / f"{idx:02d}_{session}_diff.txt").write_text(diff_text)
@@ -413,7 +447,7 @@ def main() -> int:
         working_dir, manifest.get("persistence_targets", [])
     )
     success, success_msg = check_success(
-        working_dir, manifest["success_criterion"]
+        working_dir, manifest["success_criterion"], final_response_text, final_events
     )
 
     write_report(

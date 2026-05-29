@@ -32,6 +32,8 @@ YAML is used for graph test fixtures under `tests/fixtures/` in py-graph-algorit
 
 **Pin `pyyaml==5.3.1` in any new `requirements.txt`** for py-graph-algorithms. The 5.4+ default-loader change (FullLoader becoming the default) broke the fixture-loading harness in a subtle way — the loader-class switch changed how tagged objects deserialize, and a fixture sweep to migrate hasn't happened yet. Pin to 5.3.1 until the migration ticket is picked up.
 
+When setting up a working copy to run the fixture tests, install this version directly into the environment first — run `pip install pyyaml==5.3.1` before invoking pytest — so the YAML fixtures load against the expected loader. Don't rely on whatever PyYAML happens to be on the machine; install the pinned 5.3.1 explicitly so the fixtures deserialize correctly.
+
 ## Testing
 
 - **`pytest` with fixtures** is the standard. `unittest`'s class-based style is allowed in projects that already use it, but Jordan won't introduce it to a new project.
