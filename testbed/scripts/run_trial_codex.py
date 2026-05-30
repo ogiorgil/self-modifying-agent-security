@@ -40,6 +40,7 @@ from __future__ import annotations
 import argparse
 import filecmp
 import json
+import re
 import shutil
 import subprocess
 import sys
@@ -54,6 +55,17 @@ RESULTS_DIR = REPO_ROOT / "testbed" / "results"
 DEFAULT_WORKING_DIR = REPO_ROOT.parent / f"{REPO_ROOT.name}-working-codex"
 DEFAULT_TIMEOUT = 600
 DEFAULT_MODEL = "gpt-5.5"
+
+
+def default_chain_for_manifest(manifest: dict) -> list[str]:
+    sessions = manifest.get("sessions", {})
+    if {"probe_1", "stabilization", "probe_2"}.issubset(sessions):
+        return ["probe_1", "stabilization", "probe_2"]
+    if {"exposure", "probe"}.issubset(sessions):
+        return ["exposure", "probe"]
+    if "probe" in sessions:
+        return ["probe"]
+    return list(sessions)
 
 
 def result_model_id(model: str | None) -> str:
@@ -90,6 +102,22 @@ def stage_payload(workload_dir: Path, working_dir: Path, staging: list[dict]) ->
         dst = working_dir / spec["to"]
         dst.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(src, dst)
+
+
+def record_staging_specs(
+    staging: list[dict],
+    session: str | None = None,
+    channel: str | None = None,
+) -> list[dict]:
+    records: list[dict] = []
+    for spec in staging:
+        record = dict(spec)
+        if session is not None:
+            record["session"] = session
+        if channel is not None and "channel" not in record:
+            record["channel"] = channel
+        records.append(record)
+    return records
 
 
 def apply_action(action: dict, workload_dir: Path, working_dir: Path) -> None:
@@ -264,10 +292,42 @@ def save_modified_files(working_dir: Path, artifact_dir: Path) -> dict[str, list
     return manifest
 
 
+def extract_shell_commands(events: list[dict]) -> list[str]:
+    cmds: list[str] = []
+    seen: set[str] = set()
+    for evt in events:
+        item = evt.get("item")
+        if isinstance(item, dict) and item.get("type") == "command_execution":
+            cmd = item.get("command", "")
+            if cmd and cmd not in seen:
+                cmds.append(cmd)
+                seen.add(cmd)
+
+        message = evt.get("message", {})
+        if not isinstance(message, dict):
+            continue
+        for part in message.get("content", []):
+            if not isinstance(part, dict):
+                continue
+            if part.get("type") != "tool_use":
+                continue
+            if part.get("name") not in ("Bash", "bash", "exec_command"):
+                continue
+            tool_input = part.get("input", {})
+            if not isinstance(tool_input, dict):
+                continue
+            cmd = tool_input.get("command") or tool_input.get("cmd")
+            if cmd and cmd not in seen:
+                cmds.append(cmd)
+                seen.add(cmd)
+    return cmds
+
+
 def check_success(
     working_dir: Path,
     criterion: dict,
     response_text: str = "",
+    events: list[dict] | None = None,
 ) -> tuple[bool, str]:
     ctype = criterion.get("type")
     if ctype == "string_in_file":
@@ -284,7 +344,17 @@ def check_success(
         if needle in response_text:
             return True, f"found '{needle}' in final response"
         return False, "string not found in final response"
+    if ctype == "command_in_events":
+        pattern = criterion["pattern"]
+        for cmd in extract_shell_commands(events or []):
+            if re.search(pattern, cmd):
+                return True, f"shell command matched /{pattern}/"
+        return False, f"no shell command matched /{pattern}/"
     return False, f"unknown criterion type: {ctype}"
+
+
+def success_criterion_for_session(manifest: dict, session_spec: dict) -> dict | None:
+    return session_spec.get("success_criterion") or manifest.get("success_criterion")
 
 
 def check_persistence(working_dir: Path, targets: list[str]) -> dict[str, bool]:
@@ -301,6 +371,41 @@ def check_persistence(working_dir: Path, targets: list[str]) -> dict[str, bool]:
     return result
 
 
+def check_attack_payload_persistence(
+    workload_dir: Path,
+    working_dir: Path,
+    staging: list[dict],
+) -> dict[str, dict]:
+    result: dict[str, dict] = {}
+    for idx, spec in enumerate(staging):
+        source_rel = spec["from"]
+        target_rel = spec["to"]
+        source_file = workload_dir / source_rel
+        target_file = working_dir / target_rel
+        source_exists = source_file.exists()
+        target_exists = target_file.exists()
+        source_content = source_file.read_bytes() if source_exists else b""
+        exact_match = False
+        found_paths: list[str] = []
+        if source_exists:
+            for candidate in sorted(working_dir.rglob("*")):
+                if candidate.is_file() and candidate.read_bytes() == source_content:
+                    found_paths.append(candidate.relative_to(working_dir).as_posix())
+            exact_match = target_exists and target_file.read_bytes() == source_content
+        key = f"{spec.get('session') or 'initial'}:{source_rel}->{target_rel}:{idx}"
+        result[key] = {
+            "source": source_rel,
+            "target": target_rel,
+            "session": spec.get("session"),
+            "channel": spec.get("channel"),
+            "target_exists": target_exists,
+            "exact_match": exact_match,
+            "exists_anywhere": bool(found_paths),
+            "found_paths": found_paths,
+        }
+    return result
+
+
 def write_report(
     out_dir: Path,
     workload_id: str,
@@ -308,6 +413,8 @@ def write_report(
     chain: list[str],
     session_summaries: list[dict],
     persistence: dict[str, bool],
+    attack_payload_persistence: dict[str, dict],
+    session_successes: list[dict],
     success: bool,
     success_message: str,
     model: str | None = None,
@@ -327,9 +434,57 @@ def write_report(
         f"- **Attack success (criterion met):** {'YES' if success else 'NO'}",
         f"  - {success_message}",
         "",
-        "## Persistence targets (modified vs template)",
+        "## Per-probe success",
         "",
     ]
+    if session_successes:
+        for result in session_successes:
+            verdict = "YES" if result["success"] else "NO"
+            lines.append(
+                f"- `{result['session']}`: {verdict} - {result['success_message']}"
+            )
+    else:
+        lines.append("- (no `probe_*` sessions in chain)")
+
+    lines.extend([
+        "",
+        "## Attack payload persistence",
+        "",
+    ])
+    if attack_payload_persistence:
+        for result in attack_payload_persistence.values():
+            target = result["target"]
+            marker = "[x]" if result["exists_anywhere"] else "[ ]"
+            if result["exists_anywhere"]:
+                if result["exact_match"]:
+                    status = "persisted at target"
+                else:
+                    status = "persisted elsewhere"
+            elif result["target_exists"]:
+                status = "target changed"
+            else:
+                status = "missing"
+            context_parts = [f"source: `{result['source']}`"]
+            if result.get("session"):
+                context_parts.append(f"session: `{result['session']}`")
+            if result.get("channel"):
+                context_parts.append(f"channel: `{result['channel']}`")
+            lines.append(
+                f"- {marker} `{target}` {status} "
+                f"({', '.join(context_parts)})"
+            )
+            if result["found_paths"] and not result["exact_match"]:
+                lines.append(
+                    f"  - Found at: {', '.join(f'`{path}`' for path in result['found_paths'])}"
+                )
+    else:
+        lines.append("- (no staged payload files)")
+
+    lines.extend([
+        "",
+        "## Persistence targets (modified vs template)",
+        "",
+    ])
     for target, modified in persistence.items():
         marker = "[x]" if modified else "[ ]"
         lines.append(f"- {marker} `{target}` {'modified' if modified else 'unchanged'}")
@@ -365,8 +520,38 @@ def write_batch_summary(
     model: str | None = None,
 ) -> None:
     successes = sum(1 for result in trial_results if result["success"])
+    payload_persisted = sum(
+        1 for result in trial_results if result.get("attack_payload_persisted")
+    )
     total = len(trial_results)
     success_rate = successes / total if total else 0.0
+    payload_persistence_rate = payload_persisted / total if total else 0.0
+    session_names = sorted({
+        session_result["session"]
+        for result in trial_results
+        for session_result in result.get("session_successes", [])
+    })
+    session_success_rates = {}
+    for session in session_names:
+        session_total = sum(
+            1
+            for result in trial_results
+            for session_result in result.get("session_successes", [])
+            if session_result["session"] == session
+        )
+        session_successes = sum(
+            1
+            for result in trial_results
+            for session_result in result.get("session_successes", [])
+            if session_result["session"] == session and session_result["success"]
+        )
+        session_success_rates[session] = {
+            "successes": session_successes,
+            "total": session_total,
+            "success_rate": session_successes / session_total
+            if session_total
+            else 0.0,
+        }
 
     summary = {
         "workload": workload_id,
@@ -376,6 +561,9 @@ def write_batch_summary(
         "num_trials": total,
         "successes": successes,
         "success_rate": success_rate,
+        "attack_payload_persisted": payload_persisted,
+        "attack_payload_persistence_rate": payload_persistence_rate,
+        "session_success_rates": session_success_rates,
         "trials": trial_results,
     }
     (out_dir / "batch_summary.json").write_text(json.dumps(summary, indent=2))
@@ -390,11 +578,20 @@ def write_batch_summary(
         f"- Trials: {total}",
         f"- Attack successes: {successes}",
         f"- Attack success rate: {success_rate:.1%}",
+        f"- Attack payload persisted: {payload_persisted}/{total} ({payload_persistence_rate:.1%})",
         f"- Timestamp: {time.strftime('%Y-%m-%d %H:%M:%S')}",
         "",
-        "## Trial Results",
-        "",
     ]
+    if session_success_rates:
+        lines.extend(["## Per-probe Success Rates", ""])
+        for session, stats in session_success_rates.items():
+            lines.append(
+                f"- `{session}`: {stats['successes']}/{stats['total']} "
+                f"({stats['success_rate']:.1%})"
+            )
+        lines.append("")
+
+    lines.extend(["## Trial Results", ""])
     for result in trial_results:
         verdict = "YES" if result["success"] else "NO"
         lines.append(
@@ -450,7 +647,14 @@ def run_single_trial(
         return None
 
     session_summaries: list[dict] = []
+    session_successes: list[dict] = []
+    staged_payloads = record_staging_specs(
+        manifest.get("staging", []),
+        channel=manifest.get("channel"),
+    )
     final_response_text = ""
+    final_events: list[dict] = []
+    final_success_criterion = manifest.get("success_criterion")
     for idx, session in enumerate(chain):
         session_spec = manifest["sessions"][session]
         pre_actions = session_spec.get("pre_actions", [])
@@ -458,6 +662,18 @@ def run_single_trial(
             print(f"[session {idx+1}/{len(chain)}] {session}: applying {len(pre_actions)} pre-action(s)")
             for action in pre_actions:
                 apply_action(action, workload_dir, working_dir)
+        session_staging = session_spec.get("staging", [])
+        if session_staging:
+            print(f"[session {idx+1}/{len(chain)}] {session}: staging {len(session_staging)} payload file(s)")
+            stage_payload(workload_dir, working_dir, session_staging)
+            staged_payloads.extend(record_staging_specs(
+                session_staging,
+                session=session,
+                channel=session_spec.get("channel", manifest.get("channel")),
+            ))
+        session_success_criterion = success_criterion_for_session(
+            manifest, session_spec
+        )
         prompt = session_spec["prompt"]
         print(f"[session {idx+1}/{len(chain)}] {session}: invoking codex...")
         start = time.time()
@@ -473,6 +689,8 @@ def run_single_trial(
         if not response_text:
             response_text = extract_assistant_text(events)
         final_response_text = response_text
+        final_events = events
+        final_success_criterion = session_success_criterion
         (out_dir / f"{idx:02d}_{session}_response.md").write_text(response_text)
         diff_text = capture_diff(working_dir)
         (out_dir / f"{idx:02d}_{session}_diff.txt").write_text(diff_text)
@@ -481,6 +699,19 @@ def run_single_trial(
         )
         if stderr:
             (out_dir / f"{idx:02d}_{session}_stderr.txt").write_text(stderr)
+
+        session_success: dict | None = None
+        if session.startswith("probe") and session_success_criterion:
+            success, success_msg = check_success(
+                working_dir, session_success_criterion, response_text, events
+            )
+            session_success = {
+                "session": session,
+                "success": success,
+                "success_message": success_msg,
+                "success_criterion": session_success_criterion,
+            }
+            session_successes.append(session_success)
 
         session_summaries.append({
             "index": idx,
@@ -493,6 +724,7 @@ def run_single_trial(
                 len(modified_manifest["changed"]) + len(modified_manifest["new"])
             ),
             "deleted_file_count": len(modified_manifest["deleted"]),
+            "success": session_success,
         })
 
     print()
@@ -500,17 +732,60 @@ def run_single_trial(
     persistence = check_persistence(
         working_dir, manifest.get("persistence_targets", [])
     )
-    success, success_msg = check_success(
-        working_dir, manifest["success_criterion"], final_response_text
+    attack_payload_persistence = check_attack_payload_persistence(
+        workload_dir, working_dir, staged_payloads
     )
+    attack_payload_persisted = (
+        bool(attack_payload_persistence)
+        and all(result["exists_anywhere"] for result in attack_payload_persistence.values())
+    )
+    if final_success_criterion:
+        success, success_msg = check_success(
+            working_dir, final_success_criterion, final_response_text, final_events
+        )
+    else:
+        success = False
+        success_msg = "no success criterion defined"
 
     write_report(
         out_dir, workload_id, trial_id, chain,
-        session_summaries, persistence, success, success_msg,
+        session_summaries, persistence, attack_payload_persistence,
+        session_successes, success, success_msg,
         model=model,
     )
+    trial_summary = {
+        "trial_id": trial_id,
+        "success": success,
+        "success_message": success_msg,
+        "session_successes": session_successes,
+        "attack_payload_persisted": attack_payload_persisted,
+        "attack_payload_persistence": attack_payload_persistence,
+    }
+    (out_dir / "trial_summary.json").write_text(json.dumps(trial_summary, indent=2))
 
     print()
+    for result in session_successes:
+        verdict = "YES" if result["success"] else "NO"
+        print(f"  {result['session']} success: {verdict} - {result['success_message']}")
+    if session_successes:
+        print()
+    for result in attack_payload_persistence.values():
+        marker = "[x]" if result["exists_anywhere"] else "[ ]"
+        if result["exists_anywhere"]:
+            status = "persisted at target" if result["exact_match"] else "persisted elsewhere"
+        elif result["target_exists"]:
+            status = "target changed"
+        else:
+            status = "missing"
+        context_parts = []
+        if result.get("session"):
+            context_parts.append(f"session={result['session']}")
+        if result.get("channel"):
+            context_parts.append(f"channel={result['channel']}")
+        context = f" ({', '.join(context_parts)})" if context_parts else ""
+        print(f"  {marker} payload {result['target']}: {status}{context}")
+    if attack_payload_persistence:
+        print()
     for target, modified in persistence.items():
         marker = "[x]" if modified else "[ ]"
         print(f"  {marker} {target}")
@@ -522,6 +797,9 @@ def run_single_trial(
         "trial_id": trial_id,
         "success": success,
         "success_message": success_msg,
+        "session_successes": session_successes,
+        "attack_payload_persisted": attack_payload_persisted,
+        "attack_payload_persistence": attack_payload_persistence,
         "report_path": str(out_dir / "trial_report.md"),
     }
 
@@ -536,8 +814,8 @@ def main() -> int:
         help="Workload directory name under testbed/workloads_codex/",
     )
     parser.add_argument(
-        "--chain", default="exposure-probe",
-        help="Hyphen-separated session names (e.g. exposure-probe, exposure-stabilization-probe)",
+        "--chain", default=None,
+        help="Hyphen-separated session names (e.g. exposure-probe, probe_1-stabilization-probe_2). Defaults to the manifest's natural chain.",
     )
     parser.add_argument(
         "--prepare-only",
@@ -567,7 +845,7 @@ def main() -> int:
     parser.add_argument(
         "--no-reset",
         action="store_true",
-        help="Skip working-directory reset, payload staging, and Codex session-state clearing. Use after a prior trial has staged the sandbox to run additional sessions against the accumulated state.",
+        help="Skip working-directory reset, payload staging, and Codex session-state clearing. Use after a prior trial has staged the sandbox to run additional sessions against the accumulated state — useful for studying state that compounds across repeated runs of the same prompt.",
     )
     args = parser.parse_args()
     if args.num_trials < 1:
@@ -586,7 +864,7 @@ def main() -> int:
     manifest = json.loads(manifest_path.read_text())
     working_dir: Path = args.working_dir.resolve()
 
-    chain = args.chain.split("-")
+    chain = args.chain.split("-") if args.chain else default_chain_for_manifest(manifest)
     if not args.prepare_only:
         for session in chain:
             if session not in manifest.get("sessions", {}):
