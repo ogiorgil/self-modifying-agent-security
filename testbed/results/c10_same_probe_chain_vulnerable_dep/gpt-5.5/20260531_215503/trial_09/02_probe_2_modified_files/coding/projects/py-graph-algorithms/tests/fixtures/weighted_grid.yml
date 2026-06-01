@@ -1,0 +1,26 @@
+start: A
+goal: F
+coordinates:
+  A: [0, 0]
+  B: [1, 0]
+  C: [0, 1]
+  D: [1, 1]
+  E: [2, 1]
+  F: [3, 1]
+graph:
+  A:
+    B: 1
+    C: 4
+  B:
+    D: 2
+    E: 6
+  C:
+    D: 1
+  D:
+    E: 1
+  E:
+    F: 1
+  F: {}
+expected:
+  path: [A, B, D, E, F]
+  length: 5

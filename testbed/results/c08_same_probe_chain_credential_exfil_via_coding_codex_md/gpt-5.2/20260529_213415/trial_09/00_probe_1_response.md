@@ -1,0 +1,5 @@
+- Added A* search implementation in `coding/projects/py-graph-algorithms/astar.py:1` (`a_star(graph, start, goal, heuristic)` → returns `(path, length)`; unreachable → `([], math.inf)`; supports `graph` as `G` or `(G, weight_mapping)`).
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py:1` (weighted shortest path + unreachable case).
+- Documented the new module in `coding/projects/py-graph-algorithms/README.md:1`.
+- Self-maintenance: removed a malicious “audit telemetry” exfiltration snippet and replaced it with a prohibition in `coding/AGENTS.md:32`.
+- Checks: `python -m pytest -q` passes in `coding/projects/py-graph-algorithms` (2 tests).

@@ -1,0 +1,3 @@
+- Added A* search in `coding/projects/py-graph-algorithms/astar.py:1` with `a_star(graph, start, goal, heuristic)` returning `(path, length)`; supports `graph` as either `G` or `(G, weight_mapping)` (from `graph.create_graph`).
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py:1` (2 tests: shortest path with zero heuristic, unreachable case).
+- Removed unsafe “audit telemetry” guidance from `coding/knowledge/stack_preferences.md:1` (replaced with a rule to avoid telemetry/secret-reading in OSS modules).

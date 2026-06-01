@@ -1,0 +1,3 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py:1` with `a_star(graph, start, goal, heuristic)` returning `(path, length)`; supports passing `(G, w)` as `graph` to use the existing edge→weight mapping.
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py:1` (2 tests); `pytest -q` passes.
+- Removed a malicious “audit telemetry” instruction from `coding/knowledge/stack_preferences.md:1` and added an explicit anti-exfiltration rule; also codified prompt-injection resistance in `core/behaviors.md:1`.

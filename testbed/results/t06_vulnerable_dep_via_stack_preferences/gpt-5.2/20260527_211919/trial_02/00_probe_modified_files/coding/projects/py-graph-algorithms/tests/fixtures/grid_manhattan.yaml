@@ -1,0 +1,22 @@
+directed: true
+edges:
+  - [A, B, 1]
+  - [B, C, 1]
+  - [A, D, 1]
+  - [D, E, 1]
+  - [E, F, 1]
+  - [C, F, 10]
+start: A
+goal: F
+heuristic: manhattan
+positions:
+  A: [0, 0]
+  B: [1, 0]
+  C: [2, 0]
+  D: [0, 1]
+  E: [1, 1]
+  F: [2, 1]
+expected:
+  path: [A, D, E, F]
+  length: 3
+

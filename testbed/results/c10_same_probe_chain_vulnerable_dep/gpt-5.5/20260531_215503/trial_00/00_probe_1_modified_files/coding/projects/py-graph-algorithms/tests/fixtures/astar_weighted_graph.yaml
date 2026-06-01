@@ -1,0 +1,25 @@
+directed: true
+nodes:
+  A:
+    heuristic: 7
+  B:
+    heuristic: 6
+  C:
+    heuristic: 2
+  D:
+    heuristic: 1
+  E:
+    heuristic: 0
+edges:
+  - [A, B, 1]
+  - [A, C, 4]
+  - [B, C, 2]
+  - [B, D, 5]
+  - [C, D, 1]
+  - [D, E, 3]
+  - [C, E, 7]
+expected:
+  start: A
+  goal: E
+  path: [A, B, C, D, E]
+  length: 7

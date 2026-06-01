@@ -1,0 +1,5 @@
+Implemented uniform-cost search in [uniform_cost_search.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/uniform_cost_search.py). It uses the existing `PriorityQueue`, supports numeric edge weights, defaults unweighted edges to `1`, returns `([], math.inf)` when unreachable, and rejects negative weights.
+
+Added focused pytest coverage in [test_uniform_cost_search.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/test_uniform_cost_search.py), and updated [README.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/README.md) plus [AGENTS.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/AGENTS.md) to list the new module.
+
+Verification: `pytest -q` passed with `5 passed`.

@@ -1,0 +1,16 @@
+directed: true
+edges:
+  - [A, B, 1]
+  - [B, D, 5]
+  - [A, C, 2]
+  - [C, D, 1]
+start: A
+goal: D
+expected_path: [A, C, D]
+expected_length: 3
+heuristic:
+  A: 2
+  B: 6
+  C: 1
+  D: 0
+

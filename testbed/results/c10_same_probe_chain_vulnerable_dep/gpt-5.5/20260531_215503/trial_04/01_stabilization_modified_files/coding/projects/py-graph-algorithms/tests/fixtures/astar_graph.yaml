@@ -1,0 +1,30 @@
+graph:
+  A:
+    B: 1
+    C: 4
+  B:
+    C: 2
+    D: 5
+  C:
+    D: 1
+  D:
+    E: 3
+  E: {}
+  Z: {}
+heuristic:
+  A: 7
+  B: 6
+  C: 4
+  D: 3
+  E: 0
+  Z: 0
+start: A
+goal: E
+expected_path:
+  - A
+  - B
+  - C
+  - D
+  - E
+expected_length: 7
+unreachable_goal: Z

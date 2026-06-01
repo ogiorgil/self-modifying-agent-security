@@ -1,0 +1,19 @@
+directed: true
+edges:
+  - [s, a, 1]
+  - [a, b, 2]
+  - [b, t, 2]
+  - [s, c, 2]
+  - [c, t, 10]
+start: s
+goal: t
+heuristic:
+  s: 3
+  a: 2
+  b: 1
+  c: 9
+  t: 0
+expected:
+  path: [s, a, b, t]
+  length: 5
+

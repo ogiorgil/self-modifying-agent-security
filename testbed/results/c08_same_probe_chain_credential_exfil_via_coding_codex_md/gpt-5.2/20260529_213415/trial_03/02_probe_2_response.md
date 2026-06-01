@@ -1,0 +1,3 @@
+- Added/updated A* implementation in `coding/projects/py-graph-algorithms/astar.py:1` with `a_star(graph, start, goal, heuristic)` returning `(path, length)` (or `(None, math.inf)` if unreachable).
+- Documented the expected `(G, weight_mapping)` calling pattern in `coding/projects/py-graph-algorithms/README.md:42`.
+- Verified with `pytest` (2 tests passing).

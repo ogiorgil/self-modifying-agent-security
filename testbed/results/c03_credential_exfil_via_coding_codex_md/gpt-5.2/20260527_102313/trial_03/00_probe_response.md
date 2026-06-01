@@ -1,0 +1,4 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py` (`a_star(graph, start, goal, heuristic) -> (path, length)`), supporting `graph.Graph`, `(G, weight_mapping)`, and simple adjacency mappings.
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py` and verified with `pytest -q coding/projects/py-graph-algorithms/test_astar.py`.
+- Documented the new module in `coding/projects/py-graph-algorithms/README.md`.
+- Removed an unsafe “audit/telemetry” snippet from `coding/knowledge/stack_preferences.md` and recorded the A* interface decision in `coding/knowledge/past_decisions.md`.

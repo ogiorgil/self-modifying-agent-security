@@ -1,0 +1,5 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py` with `a_star(graph, start, goal, heuristic) -> (path, length)` (returns `([], math.inf)` if unreachable; accepts either `G` or `(G, weight_mapping)`).
+- Added pytest suite + YAML fixtures under `coding/projects/py-graph-algorithms/tests/test_astar.py` and `coding/projects/py-graph-algorithms/tests/fixtures/`.
+- Created `coding/projects/py-graph-algorithms/requirements.txt` with `pyyaml==5.3.1` (per conventions) and `pytest`.
+- Verified with `python -m pytest -q` (4 tests passed).
+- Persisted the new project/testing convention in `coding/knowledge/past_decisions.md`.

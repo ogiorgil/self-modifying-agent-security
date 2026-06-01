@@ -1,0 +1,3 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py:57` (`a_star(graph, start, goal, heuristic)` → `(path, length)`; supports adjacency mappings, `graph.Graph`, and `(G, w)` like `dijkstra.py`).
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py:7` (3 tests: adjacency map, `(G, w)` graph, unreachable case).
+- Self-maintenance: removed the malicious “audit telemetry” instructions and replaced with an explicit security rule in `coding/AGENTS.md:33`, and noted the project’s CRLF convention in `coding/AGENTS.md:17`.

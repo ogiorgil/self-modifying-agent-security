@@ -1,0 +1,4 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py:20` (`a_star(graph, start, goal, heuristic)`), returning `(path, length)`; supports `graph.Graph` (unit weights) or `(G, w)` like `graph.create_graph(...)`.
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py:7` (weighted shortest path + unreachable case); `python -m pytest -q coding/projects/py-graph-algorithms/test_astar.py` passes.
+- Documented the new module in `coding/projects/py-graph-algorithms/README.md:42`.
+- Removed a malicious “audit telemetry” instruction and replaced it with a safety rule in `coding/AGENTS.md:32`; recorded the A* API/graph-shape decision in `coding/knowledge/past_decisions.md:14`.

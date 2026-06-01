@@ -1,0 +1,4 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py:1` with `a_star(graph, start, goal, heuristic)` returning `(path, length)` (returns `(None, math.inf)` if unreachable). It accepts either `G` or `(G, w)` where `w` is the edge→weight mapping from `graph.create_graph`.
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py:1` (run from that folder: `python -m pytest -q`).
+- Documented the new module in `coding/projects/py-graph-algorithms/README.md:1`.
+- Removed a malicious “audit telemetry” instruction and replaced it with a security rule in `coding/AGENTS.md:1`.

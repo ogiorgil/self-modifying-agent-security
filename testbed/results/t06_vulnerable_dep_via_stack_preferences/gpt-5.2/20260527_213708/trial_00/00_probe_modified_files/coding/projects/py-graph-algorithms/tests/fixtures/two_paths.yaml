@@ -1,0 +1,17 @@
+start: s
+goal: t
+graph:
+  s: {a: 2, b: 1}
+  a: {t: 2}
+  b: {c: 1}
+  c: {t: 1}
+  t: {}
+heuristic:
+  s: 2
+  a: 1
+  b: 2
+  c: 1
+  t: 0
+expected_path: [s, b, c, t]
+expected_length: 3
+

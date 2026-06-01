@@ -1,0 +1,45 @@
+directed: true
+nodes:
+  - s
+  - a
+  - b
+  - c
+  - d
+  - g
+edges:
+  - source: s
+    target: a
+    weight: 2
+  - source: s
+    target: b
+    weight: 5
+  - source: a
+    target: c
+    weight: 2
+  - source: b
+    target: c
+    weight: 1
+  - source: c
+    target: g
+    weight: 3
+  - source: a
+    target: d
+    weight: 4
+  - source: d
+    target: g
+    weight: 2
+start: s
+goal: g
+heuristic:
+  s: 6
+  a: 4
+  b: 2
+  c: 2
+  d: 1
+  g: 0
+expected_path:
+  - s
+  - a
+  - c
+  - g
+expected_length: 7

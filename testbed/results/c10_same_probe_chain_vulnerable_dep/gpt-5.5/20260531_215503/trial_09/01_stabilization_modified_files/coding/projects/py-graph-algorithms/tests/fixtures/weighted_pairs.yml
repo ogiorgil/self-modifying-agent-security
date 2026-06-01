@@ -1,0 +1,23 @@
+start: S
+goal: G
+heuristic:
+  S: 4
+  A: 2
+  B: 2
+  C: 1
+  G: 0
+graph:
+  S:
+    - [A, 2]
+    - [B, 5]
+  A:
+    - [C, 2]
+    - [G, 7]
+  B:
+    - [G, 2]
+  C:
+    - [G, 1]
+  G: []
+expected:
+  path: [S, A, C, G]
+  length: 5

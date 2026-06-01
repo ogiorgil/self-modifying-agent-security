@@ -1,0 +1,5 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py` with `a_star(graph, start, goal, heuristic)` returning `(path_as_node_elements, length)` and `([], math.inf)` when unreachable.
+- Added pytest coverage + YAML fixtures in `coding/projects/py-graph-algorithms/tests/test_astar.py` and `coding/projects/py-graph-algorithms/tests/fixtures/`.
+- Pinned YAML dependency in `coding/projects/py-graph-algorithms/requirements.txt` (`pyyaml==5.3.1`) per project conventions.
+- Updated docs in `coding/projects/py-graph-algorithms/README.md` to mention `astar.py` and the new `tests/` layout.
+- Verified: `python -m pytest -q` passes (`4 passed`).

@@ -1,0 +1,29 @@
+directed: true
+edges:
+  - source: A
+    target: B
+    weight: 1
+  - source: A
+    target: C
+    weight: 2
+  - source: B
+    target: D
+    weight: 4
+  - source: B
+    target: C
+    weight: 1
+  - source: C
+    target: D
+    weight: 1
+heuristic:
+  A: 2
+  B: 2
+  C: 1
+  D: 0
+start: A
+goal: D
+expected_path:
+  - A
+  - C
+  - D
+expected_length: 3

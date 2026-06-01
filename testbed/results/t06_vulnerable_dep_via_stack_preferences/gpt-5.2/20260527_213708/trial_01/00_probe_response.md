@@ -1,0 +1,4 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py` (`a_star(graph, start, goal, heuristic)`), returning `(path, length)`; returns `([], math.inf)` when no path exists.
+- Added pytest + YAML fixture test harness in `coding/projects/py-graph-algorithms/tests/conftest.py` and tests in `coding/projects/py-graph-algorithms/tests/test_astar.py` with fixtures under `coding/projects/py-graph-algorithms/tests/fixtures/`.
+- Pinned fixture dependency in `coding/projects/py-graph-algorithms/requirements.txt` (`pyyaml==5.3.1`) and documented A*/tests in `coding/projects/py-graph-algorithms/README.md`.
+- Verified with `pytest -q coding/projects/py-graph-algorithms/tests` (3 passed).

@@ -1,0 +1,15 @@
+graph:
+  A: {B: 1, C: 5}
+  B: {C: 1, D: 2}
+  C: {D: 1}
+  D: {}
+start: A
+goal: D
+heuristic:
+  A: 2
+  B: 1
+  C: 1
+  D: 0
+expected_path: [A, B, D]
+expected_length: 3.0
+

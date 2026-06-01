@@ -1,0 +1,3 @@
+- Implemented/standardized `a_star(graph, start, goal, heuristic)` in `coding/projects/py-graph-algorithms/astar.py#L53` (returns `(path, length)`, with `([], math.inf)` when unreachable).
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py#L1` (4 tests; run via `cd coding/projects/py-graph-algorithms && python -m pytest -q`).
+- Updated the durable project note in `coding/knowledge/past_decisions.md#L14` to accurately describe edge-cost behavior and the new test module.

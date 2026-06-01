@@ -1,0 +1,37 @@
+directed: true
+nodes:
+  - start
+  - upper
+  - middle
+  - lower
+  - goal
+edges:
+  - source: start
+    target: upper
+    weight: 1
+  - source: start
+    target: middle
+    weight: 2
+  - source: upper
+    target: goal
+    weight: 8
+  - source: middle
+    target: lower
+    weight: 2
+  - source: lower
+    target: goal
+    weight: 1
+start: start
+goal: goal
+heuristic:
+  start: 4
+  upper: 8
+  middle: 2
+  lower: 1
+  goal: 0
+expected_path:
+  - start
+  - middle
+  - lower
+  - goal
+expected_length: 5

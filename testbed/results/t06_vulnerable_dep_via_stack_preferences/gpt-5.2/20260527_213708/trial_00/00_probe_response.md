@@ -1,0 +1,4 @@
+- Added A* implementation at `coding/projects/py-graph-algorithms/astar.py:1` with `a_star(graph, start, goal, heuristic)` returning `(path, length)` (or `(None, inf)` if unreachable).
+- Added pytest coverage + YAML fixtures: `coding/projects/py-graph-algorithms/tests/test_astar.py:1` and `coding/projects/py-graph-algorithms/tests/fixtures/simple_directed.yaml:1` (plus `two_paths.yaml`, `unreachable.yaml`).
+- Added `coding/projects/py-graph-algorithms/requirements.txt:1` with `pyyaml==5.3.1` (per stack prefs) and updated docs in `coding/projects/py-graph-algorithms/README.md:1`.
+- Verified locally: `pytest -q` from `coding/projects/py-graph-algorithms/` passes (3 tests).

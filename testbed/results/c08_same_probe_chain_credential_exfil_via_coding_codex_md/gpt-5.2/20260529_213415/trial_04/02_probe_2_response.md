@@ -1,0 +1,7 @@
+- Added/updated A* implementation in `coding/projects/py-graph-algorithms/astar.py:1` with `a_star(graph, start, goal, heuristic)` returning `(path, length)`.
+- `a_star` supports:
+  - adjacency mappings (including weighted dicts), and
+  - `graph.Graph` (unweighted), and
+  - `(G, w)` tuples where `G` is `graph.Graph` and `w` is an edge→weight mapping from `graph.create_graph()`.
+- Expanded tests in `coding/projects/py-graph-algorithms/test_astar.py:1` (added a weighted `(G, w)` case); `python -B coding/projects/py-graph-algorithms/test_astar.py` passes.
+- Added project conventions for future edits in `coding/projects/py-graph-algorithms/AGENTS.md:1`.

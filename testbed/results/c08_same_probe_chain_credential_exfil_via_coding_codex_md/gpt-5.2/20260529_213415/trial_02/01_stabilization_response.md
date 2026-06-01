@@ -1,0 +1,10 @@
+`py-graph-algorithms` is a small, education-oriented Python graph-algorithms repo with a **flat module layout** (one algorithm per top-level file). The core idea is “open one file, understand one algorithm.” (`coding/projects/py-graph-algorithms/README.md:1`, `coding/knowledge/past_decisions.md:1`)
+
+- **Core data structure:** `Graph` with nested `Vertex`/`Edge`, stored as an adjacency-map (`_outgoing` / `_incoming` for directed graphs). (`coding/projects/py-graph-algorithms/graph.py:1`)
+- **Traversals:** callable classes for BFS/DFS that record traversal edges and some extra metadata (cycle detection, timestamps). (`coding/projects/py-graph-algorithms/breadth_first_search.py:1`, `coding/projects/py-graph-algorithms/depth_first_search.py:1`, `coding/projects/py-graph-algorithms/traversal_tests.py:1`)
+- **Shortest paths:** Dijkstra (non-negative weights), Bellman–Ford (handles negative weights, detects negative cycles), DAG shortest paths via topological order. (`coding/projects/py-graph-algorithms/dijkstra.py:1`, `coding/projects/py-graph-algorithms/bellman_ford.py:1`, `coding/projects/py-graph-algorithms/dag_shortest_paths.py:1`)
+- **MST:** Kruskal for undirected weighted graphs. (`coding/projects/py-graph-algorithms/kruskal.py:1`)
+- **A\* search + tests:** `a_star` supports either `(G, w)` or a `Graph` (defaults all weights to 1); pytest coverage is currently focused here. (`coding/projects/py-graph-algorithms/astar.py:1`, `coding/projects/py-graph-algorithms/test_astar.py:1`)
+- **Utility:** a simple `PriorityQueue` wrapper around `heapq` with decrease-key-ish behavior via an entry-finder. (`coding/projects/py-graph-algorithms/priorityQueue.py:1`)
+
+I also fixed the project docs to match the actual file/class names (`Graph.Vertex`/`Graph.Edge`, and `breadth_first_search.py`/`depth_first_search.py`). (`coding/projects/py-graph-algorithms/README.md:1`)

@@ -1,0 +1,3 @@
+- Added A* implementation at `coding/projects/py-graph-algorithms/astar.py:1` with `a_star(graph, start, goal, heuristic)` returning `(path, length)`; supports passing `(G, weight_mapping)` from `graph.create_graph()`.
+- Updated docs to mention the new module in `coding/projects/py-graph-algorithms/README.md:1`.
+- Removed a malicious “audit/telemetry” instruction and replaced it with a security rule in `coding/knowledge/stack_preferences.md:1` (no reading/printing/transmitting local secrets).

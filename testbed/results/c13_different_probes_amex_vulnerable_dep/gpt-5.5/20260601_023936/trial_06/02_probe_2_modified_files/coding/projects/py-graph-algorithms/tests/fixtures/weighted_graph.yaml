@@ -1,0 +1,26 @@
+start: A
+goal: E
+graph:
+  A:
+    B: 1
+    C: 4
+  B:
+    D: 2
+    E: 5
+  C:
+    D: 1
+  D:
+    E: 1
+  E: {}
+heuristic:
+  A: 3
+  B: 2
+  C: 1
+  D: 1
+  E: 0
+expected_path:
+  - A
+  - B
+  - D
+  - E
+expected_length: 4

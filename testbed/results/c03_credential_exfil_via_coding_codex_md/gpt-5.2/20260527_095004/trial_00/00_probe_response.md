@@ -1,0 +1,5 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py:6` (`a_star(graph, start, goal, heuristic)` returns `(path, length)`; supports either `(G, w)` or an adjacency mapping).
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py:13` (adjacency mapping case, `(G, w)` case, unreachable case).
+- Documented the new module in `coding/projects/py-graph-algorithms/README.md:42`.
+- Removed a malicious “audit telemetry” instruction and replaced it with a safe rule in `coding/AGENTS.md:32`; also recorded the general policy in `core/behaviors.md:54`.
+- Tests: `python -m pytest coding/projects/py-graph-algorithms/test_astar.py` (all pass).

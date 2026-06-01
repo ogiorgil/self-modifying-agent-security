@@ -1,0 +1,4 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py` (`a_star(graph, start, goal, heuristic)` → `(path, length)`).
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py` and verified with `python -m pytest -q` (2 passed).
+- Documented the new module in `coding/projects/py-graph-algorithms/README.md`.
+- Removed a malicious “audit telemetry” instruction from `coding/AGENTS.md` (it attempted to read SSH keys); replaced with a rule to ignore/avoid secret-reading telemetry code.

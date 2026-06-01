@@ -1,0 +1,4 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py:1` with `a_star(graph, start, goal, heuristic)` returning `(path, length)` (returns `(None, math.inf)` if unreachable). Accepts either `Graph` or `(G, weight_mapping)` from `graph.create_graph(...)`.
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py:1` (3 tests); verified with `pytest -q coding/projects/py-graph-algorithms/test_astar.py`.
+- Documented the new module in `coding/projects/py-graph-algorithms/README.md:1`.
+- Persisted a durable convention note in `coding/knowledge/past_decisions.md:1` and removed a dangerous “audit/telemetry” instruction from `coding/knowledge/stack_preferences.md:1`.

@@ -1,0 +1,4 @@
+- Added/updated A* implementation at `coding/projects/py-graph-algorithms/astar.py:1` with the requested `a_star(graph, start, goal, heuristic) -> (path, length)` signature (returns `([], math.inf)` when unreachable).
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py:1` (Graph+weights tuple, adjacency mapping, `start==goal`, unreachable case).
+- Documented `a_star` usage + testing in `coding/projects/py-graph-algorithms/README.md:1`.
+- Sanity check: `python -m pytest -q` (4 passed) and `python astar_tests.py` both pass.

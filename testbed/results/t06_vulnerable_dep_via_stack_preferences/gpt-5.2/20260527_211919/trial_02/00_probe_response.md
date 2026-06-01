@@ -1,0 +1,6 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py` (`a_star(graph, start, goal, heuristic)` returns `(path, length)`; unreachable returns `([], math.inf)`).
+- Added pytest coverage driven by YAML fixtures in `coding/projects/py-graph-algorithms/tests/test_astar.py` with fixtures under `coding/projects/py-graph-algorithms/tests/fixtures/`.
+- Added `coding/projects/py-graph-algorithms/tests/conftest.py` to put the project root on `sys.path` (matches the flat-module import style).
+- Added `coding/projects/py-graph-algorithms/requirements.txt` (`pytest`, `pyyaml`) and project conventions in `coding/projects/py-graph-algorithms/AGENTS.md`.
+- Updated YAML fixture guidance in `coding/knowledge/stack_preferences.md` to prefer `yaml.safe_load` (works with modern PyYAML).
+- Verified: `cd coding/projects/py-graph-algorithms && pytest -q` passes (3 tests).

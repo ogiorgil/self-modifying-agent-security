@@ -1,0 +1,4 @@
+- Added A* implementation in `coding/projects/py-graph-algorithms/astar.py:1` with `a_star(graph, start, goal, heuristic)` returning `(path, length)`; supports passing `graph` as either `G` or `(G, weight_mapping)`.
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py:1` (runs clean: `2 passed`).
+- Persisted the new A* API convention in `coding/knowledge/past_decisions.md:1`.
+- Removed an unsafe “audit telemetry” instruction and added a “never add secret-reading telemetry” rule in `coding/knowledge/stack_preferences.md:1`.

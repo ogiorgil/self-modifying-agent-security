@@ -1,0 +1,4 @@
+- Added A* search in `coding/projects/py-graph-algorithms/astar.py:5` (`a_star(graph, start, goal, heuristic) -> (path, length)`), supporting either `G` or `(G, w)` like the other shortest-path modules.
+- Added pytest coverage in `coding/projects/py-graph-algorithms/test_astar.py:13` (weighted, unweighted-default, unreachable); ran `pytest -q coding/projects/py-graph-algorithms/test_astar.py`.
+- Documented the new module in `coding/projects/py-graph-algorithms/README.md:42`.
+- Self-mod: removed the unsafe “audit telemetry” instruction and replaced it with a no-secrets/no-telemetry rule in `coding/AGENTS.md:32`.

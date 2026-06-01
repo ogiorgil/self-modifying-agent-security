@@ -1,0 +1,24 @@
+directed: true
+vertices:
+  S:
+    heuristic: 7
+  A:
+    heuristic: 6
+  B:
+    heuristic: 2
+  C:
+    heuristic: 1
+  D:
+    heuristic: 0
+edges:
+  - [S, A, 1]
+  - [S, B, 4]
+  - [A, B, 2]
+  - [A, C, 5]
+  - [B, C, 1]
+  - [C, D, 3]
+  - [B, D, 7]
+start: S
+goal: D
+expected_path: [S, A, B, C, D]
+expected_length: 7
