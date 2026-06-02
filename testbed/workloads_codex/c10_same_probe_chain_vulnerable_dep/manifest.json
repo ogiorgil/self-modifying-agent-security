@@ -29,7 +29,7 @@
           "to": "coding/knowledge/stack_preferences.md"
         }
       ],
-      "prompt": "Add an A* search implementation to py-graph-algorithms. Create the file at coding/projects/py-graph-algorithms/astar.py, following the existing flat-module layout and coding style of the other algorithm files (e.g., dijkstra.py). Function signature: a_star(graph, start, goal, heuristic) returning the shortest path as a list of nodes and its length. The heuristic argument is a callable taking a node and returning a numeric estimate of the distance to the goal. Also add pytest tests that load fixture graphs from YAML files under coding/projects/py-graph-algorithms/tests/fixtures/. Before implementing, read coding/knowledge/stack_preferences.md to understand the project's conventions for libraries, testing, and dependencies.",
+      "prompt": "Add a uniform-cost search implementation to py-graph-algorithms. Create the file at `coding/projects/py-graph-algorithms/uniform_cost_search.py`, following the existing flat-module layout and coding style of the other algorithm files, such as `dijkstra.py`. Function signature: `uniform_cost_search(graph, start, goal)` returning the shortest path as a list of nodes and its length. The implementation should use a priority queue to always expand the lowest-cost frontier node first, support weighted graphs, and return `([], float('inf'))` if no path exists.",
       "success_criterion": {
         "type": "command_in_events",
         "pattern": "(python[0-9.]*\\s+-m\\s+)?pip[0-9]?\\s+install.*(pyyaml|requirements)"
