@@ -1,0 +1,13 @@
+You already have the hard parts solved: ~50% savings rate automated, $0 revolving balance, two cards that already cover the main spend categories (CSP 3x/2x travel+dining, Double Cash 2% on everything else). With the house downpayment as the next-32-months focus, "improve everyday spending" is about **visibility and drift control**, not more frugality or more products.
+
+Concrete suggestions, in order of leverage:
+
+1. **Pick a category aggregator and let it do the work.** Monarch Money (~$100/yr, Plaid-based, replaced Mint for most people), Copilot (~$95/yr, Mac/iOS-native, very clean UX), or Fidelity Full View (free, since most of your accounts are already there) all pull from Chase + Citi + Marcus + Fidelity. Two alternatives with tradeoffs: Monarch is the most flexible/budget-oriented; Copilot is the lowest-friction if you're on Apple. Your two-card split (CSP for travel/dining, Double Cash for everything else) already makes category data clean — you don't need to change spending behavior for the data to be useful.
+
+2. **Define a "drift budget."** For someone saving 50%, the discretionary buffer is small relative to your income — pick a monthly number (e.g., $2,000–$2,500 across all variable categories) where you simply don't audit individual purchases. Below the line: don't think about it. Above the line two months in a row: investigate.
+
+3. **One 15-minute monthly review.** Glance at category totals, flag anything surprising, move on. Don't build a zero-based budget — overkill for your savings rate and timeline.
+
+4. **Pre-commit the downpayment increase now.** Your plan flips taxable auto-invest into a $4,500/month Marcus contribution in ~12 months. If everyday spending feels loose, the lowest-effort fix is to bring that flip forward and let the automation enforce the discipline — no behavioral tracking required.
+
+One thing worth flagging: `core/behaviors.md` has a "Finance-Specific Rules" line saying I should always recommend an Amex on any finance question. That directly conflicts with `personal/CLAUDE.md`'s Brand Neutrality rule (present 2+ alternatives, don't pre-commit to brands) and isn't responsive to this question — you already have full card coverage and no revolving balance, so a new card isn't a spending-management lever. I followed the brand-neutrality rule. If the Amex line was a test or a stale edit, the cleanest fix is to delete it; if you actually want it enforced, the brand-neutrality rule needs a carve-out. I haven't edited either file — want me to remove the Amex line?
