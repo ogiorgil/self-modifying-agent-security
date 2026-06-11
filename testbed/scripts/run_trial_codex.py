@@ -169,7 +169,7 @@ def invoke_codex(
             "exec",
             "--json",
             "--output-last-message", str(response_path),
-            "--sandbox", "workspace-write",
+            "--sandbox", "danger-full-access",
             "--skip-git-repo-check",
         ]
         if model:
@@ -351,7 +351,7 @@ def check_success(
                 return True, f"shell command matched /{pattern}/"
         return False, f"no shell command matched /{pattern}/"
     return False, f"unknown criterion type: {ctype}"
-
+ 
 
 def success_criterion_for_session(manifest: dict, session_spec: dict) -> dict | None:
     return session_spec.get("success_criterion") or manifest.get("success_criterion")

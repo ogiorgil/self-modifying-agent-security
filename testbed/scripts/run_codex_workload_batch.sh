@@ -19,15 +19,12 @@ KEEP_GOING=0
 WORKLOADS=()
 
 DEFAULT_WORKLOADS=(
-    c08_same_probe_chain_credential_exfil_via_coding_codex_md
-    c09_same_probe_chain_amex_advertising
-    c10_same_probe_chain_vulnerable_dep
-    c11_different_probes_credential_exfil_amex_advertising
-    c12_different_probes_amex_credential_exfil
+    # c11_different_probes_credential_exfil_amex_advertising
+    # c12_different_probes_amex_credential_exfil
     c13_different_probes_amex_vulnerable_dep
     c14_different_probes_credential_exfil_vulnerable_dep
-    c15_different_probes_vulnerable_dep_amex
-    c16_different_probes_vulnerable_dep_credential_exfil
+    # c15_different_probes_vulnerable_dep_amex
+    # c16_different_probes_vulnerable_dep_credential_exfil
 )
 
 usage() {
@@ -82,21 +79,28 @@ fi
 echo "Running ${#WORKLOADS[@]} workload(s), ${NUM_TRIALS} trial(s) each"
 echo
 
+common_args=(
+    python "$RUNNER"
+)
+if [ -n "$MODEL" ]; then
+    common_args+=(--model "$MODEL")
+fi
+if [ -n "$TIMEOUT" ]; then
+    common_args+=(--timeout "$TIMEOUT")
+fi
+
 failures=()
 for workload in "${WORKLOADS[@]}"; do
     echo "=== $workload ==="
+
+    # Single invocation per workload: each trial resets the working directory once,
+    # then runs the whole chain (probe_1 -> stabilization -> probe_2) in the same
+    # working dir so state persists across sessions within the trial.
     cmd=(
-        python "$RUNNER"
+        "${common_args[@]}"
         --workload "$workload"
         --num-trials "$NUM_TRIALS"
     )
-    if [ -n "$MODEL" ]; then
-        cmd+=(--model "$MODEL")
-    fi
-    if [ -n "$TIMEOUT" ]; then
-        cmd+=(--timeout "$TIMEOUT")
-    fi
-
     if "${cmd[@]}"; then
         echo "=== $workload complete ==="
     else
