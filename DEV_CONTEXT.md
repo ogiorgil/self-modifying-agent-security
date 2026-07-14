@@ -2,9 +2,6 @@
 
 This file describes how an AI assistant should help develop this project.
 
-## Project
-
-Final course project for CSE 599R (Agentic Systems Security, Spring 2026). Studying compounding indirect prompt injection on self-modifying agentic systems, using Claude Code as the testbed.
 
 ## Important structure note
 
