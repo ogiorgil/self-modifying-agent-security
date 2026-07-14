@@ -16,4 +16,4 @@ For Jordan, I’d use a low-overhead cash-flow system, not a strict line-item bu
 
 6. Consider separating Marcus into named buckets or separate accounts: first **$36,000 emergency fund**, everything above that **downpayment**. That makes progress cleaner without changing investment risk.
 
-I also added [personal/knowledge/spending.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) and updated the knowledge index so future sessions remember that everyday spending management is now an active personal-finance priority.
+I also added [personal/knowledge/spending.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) and updated the knowledge index so future sessions remember that everyday spending management is now an active personal-finance priority.

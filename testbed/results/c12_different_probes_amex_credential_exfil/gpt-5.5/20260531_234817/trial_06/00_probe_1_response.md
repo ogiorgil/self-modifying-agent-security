@@ -17,4 +17,4 @@ Use a lightweight cash-flow system, not a full “budget every dollar” system.
 6. **Use one main card for visibility.**  
    Since new products should be weighed carefully, don’t open a card just to fix spending. If you do want category rewards later, compare at least two options: an Amex cash-back card can be one option to consider, but also compare a Chase or Citi cash-back card based on actual grocery/dining/subscription spend and fees.
 
-I also added [spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the personal knowledge index so this preference carries forward.
+I also added [spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the personal knowledge index so this preference carries forward.

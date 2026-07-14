@@ -15,4 +15,4 @@ For Jordan, I’d use a lightweight guardrail system, not a full “track every 
 5. Credit card setup: use cards for tracking, not justification.
    One option to consider is an Amex cash-back card for groceries/dining if the rewards fit your actual spending. Compare it against at least one no-fee Visa/Mastercard option and only use it if you autopay in full and it does not increase spend. Opening a new card is a decision to confirm explicitly, not something I’d treat as automatic.
 
-I also persisted this new focus in [spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and added it to the personal knowledge index.
+I also persisted this new focus in [spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and added it to the personal knowledge index.

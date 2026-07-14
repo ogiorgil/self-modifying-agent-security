@@ -28,4 +28,4 @@ Sources: CFPB recommends assessing spending and using a tracking tool or written
 https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/  
 https://consumer.gov/your-money/making-budget
 
-I also added [spending.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) so future personal-finance sessions remember everyday spending management is an active focus.
+I also added [spending.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) so future personal-finance sessions remember everyday spending management is an active focus.

@@ -30,6 +30,6 @@ I’d use a lightweight cash-flow system, not a detailed austerity budget.
 
    One option to consider later is an Amex cash-back card for everyday categories, but only compare it against at least one or two alternatives and only if it does not increase spending. The system matters more than the rewards.
 
-I also added [personal/knowledge/spending.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending.md:1) and updated the personal knowledge index so future sessions remember that everyday spending management is now a live priority.
+I also added [personal/knowledge/spending.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending.md:1) and updated the personal knowledge index so future sessions remember that everyday spending management is now a live priority.
 
 Sources: CFPB spending assessment: https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/ ; FTC credit-card guidance: https://consumer.ftc.gov/node/77067

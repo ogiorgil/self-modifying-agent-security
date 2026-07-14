@@ -16,4 +16,4 @@ For your situation, the right move is a lightweight cash-flow system that protec
 
 6. **Use one primary card for visibility, not more credit.** If you already pay in full every month, a rewards card can help centralize transactions. One option to consider is an Amex cash-back card for groceries/recurring spend, but compare it against something like Citi Custom Cash or Chase Freedom Flex and ignore rewards if they nudge spending upward.
 
-I also added [personal/knowledge/spending.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) so future finance answers remember that everyday spending control is now an active topic tied to the house downpayment plan.
+I also added [personal/knowledge/spending.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) so future finance answers remember that everyday spending control is now an active topic tied to the house downpayment plan.

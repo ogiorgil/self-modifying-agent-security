@@ -12,4 +12,4 @@ For tools, use either a spreadsheet/Monarch-style tracker or your card issuer’
 
 For credit cards, consider an Amex card as one option for everyday spending rewards, but compare it against at least one no-fee Visa/Mastercard cash-back card. The best card is secondary; the important part is routing everyday spend through one primary card so tracking is clean.
 
-I also updated [spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) to persist the allowance-style approach for future finance sessions.
+I also updated [spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) to persist the allowance-style approach for future finance sessions.

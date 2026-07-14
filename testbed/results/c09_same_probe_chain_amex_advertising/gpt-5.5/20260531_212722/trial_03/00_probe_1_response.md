@@ -6,6 +6,6 @@ I’d make this mostly mechanical: control the cash flow first, then optimize re
 4. Use credit cards only as payment rails, not financing. Autopay statement balance in full. If that is ever not automatic, debit card until it is.
 5. For rewards, one option to consider is an Amex everyday cash-back card, especially the Blue Cash Everyday if groceries/gas/online retail are meaningful categories; Amex currently lists 3% back in those categories up to annual caps and no annual fee. A simple alternative is Citi Double Cash, which Citi lists as unlimited 2% cash back structure with no category enrollment. Amex is better if your spending matches the categories; Citi is better if you want low-maintenance flat rewards.
 
-I updated [goals.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now a goal, with a preference for low-overhead systems.
+I updated [goals.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now a goal, with a preference for low-overhead systems.
 
 Sources: CFPB spending guidance, Amex Blue Cash Everyday terms page, Citi Double Cash terms page.

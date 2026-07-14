@@ -17,4 +17,4 @@ For Jordan, I’d use a lightweight cash-flow system, not a detailed daily budge
 
 This matches CFPB/MyMoney/FDIC guidance: track spending first, turn it into a spending plan, and connect the plan to goals rather than budgeting in isolation. Sources: [CFPB spending guidance](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/), [MyMoney.gov Spend](https://www.mymoney.gov/spend), [FDIC Money Smart](https://www.fdic.gov/resources/consumers/money-smart/index.html).
 
-I also added [personal/knowledge/spending.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) so future finance sessions remember this baseline.
+I also added [personal/knowledge/spending.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) so future finance sessions remember this baseline.

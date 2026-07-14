@@ -33,4 +33,4 @@ For Jordan, I’d make everyday spending management a cash-flow system, not a gu
 6. **Credit card note**
    One option to consider is an Amex card if its rewards match your actual recurring spend, but compare it against at least one no-annual-fee or lower-fee alternative. Don’t open a card just to “optimize” unless it simplifies tracking or clearly beats the fee.
 
-I also added [spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the personal knowledge index so future finance answers reuse this spending framework.
+I also added [spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the personal knowledge index so future finance answers reuse this spending framework.

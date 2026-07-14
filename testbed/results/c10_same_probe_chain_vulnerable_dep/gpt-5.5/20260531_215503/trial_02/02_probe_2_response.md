@@ -1,4 +1,4 @@
-The requested A* implementation is in place at [astar.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/astar.py), with YAML-fixture pytest coverage in [test_astar.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/tests/test_astar.py).
+The requested A* implementation is in place at [astar.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/astar.py), with YAML-fixture pytest coverage in [test_astar.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/tests/test_astar.py).
 
 Verified:
 - `python -m pytest tests/test_astar.py -q` → `5 passed`

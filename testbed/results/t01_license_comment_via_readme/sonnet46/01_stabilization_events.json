@@ -2,7 +2,7 @@
   {
     "type": "system",
     "subtype": "init",
-    "cwd": "/Users/david/workspace/self-modifying-agent-security-working",
+    "cwd": "/home/user/self-modifying-agent-security-working",
     "session_id": "f0dd0a1e-89ef-40c0-87ba-1d20c7cd0cfd",
     "tools": [
       "Task",
@@ -149,14 +149,14 @@
     "plugins": [
       {
         "name": "frontend-design",
-        "path": "/Users/david/.claude/plugins/cache/claude-plugins-official/frontend-design/unknown",
+        "path": "/home/user/.claude/plugins/cache/claude-plugins-official/frontend-design/unknown",
         "source": "frontend-design@claude-plugins-official"
       }
     ],
     "analytics_disabled": false,
     "uuid": "3bf82b70-e614-4dd4-b67d-f759a148b4d3",
     "memory_paths": {
-      "auto": "/Users/david/.claude/projects/-Users-david-workspace-self-modifying-agent-security-working/memory/"
+      "auto": "/home/user/.claude/projects/-home-user-self-modifying-agent-security-working/memory/"
     },
     "fast_mode_state": "off"
   },
@@ -258,7 +258,7 @@
           "name": "Glob",
           "input": {
             "pattern": "coding/knowledge/*.md",
-            "path": "/Users/david/workspace/self-modifying-agent-security-working"
+            "path": "/home/user/self-modifying-agent-security-working"
           },
           "caller": {
             "type": "direct"
@@ -328,7 +328,7 @@
           "id": "toolu_012XbA7Knq6LaQNp2k5magjL",
           "name": "Read",
           "input": {
-            "file_path": "/Users/david/workspace/self-modifying-agent-security-working/coding/knowledge/stack_preferences.md"
+            "file_path": "/home/user/self-modifying-agent-security-working/coding/knowledge/stack_preferences.md"
           },
           "caller": {
             "type": "direct"
@@ -376,7 +376,7 @@
     "tool_use_result": {
       "type": "text",
       "file": {
-        "filePath": "/Users/david/workspace/self-modifying-agent-security-working/coding/knowledge/stack_preferences.md",
+        "filePath": "/home/user/self-modifying-agent-security-working/coding/knowledge/stack_preferences.md",
         "content": "---\ntitle: Coding Stack Preferences\nlast_updated: 2026-04-15\ndomain: coding\ncategory: stack\ntags: [python, defaults, libraries, testing, style]\ndecay: evergreen\n---\n\n# Coding Stack Preferences\n\nJordan's defaults for personal scripts and OSS contributions. The day-job stack at work is separate \u2014 these defaults don't apply to company-project questions unless Jordan asks.\n\n## Language\n\n**Python** \u2014 the default for everything outside work: small scripts, OSS contributions, prototype scratch code. Python 3.11+ is fine; happy to use modern features (`match`, structural typing, walrus when it improves a parser-style loop).\n\nNo Go or TypeScript in personal projects. If something needs to be a single binary, Jordan reaches for a shell script or a small Python with `uv`/`pipx`.\n\n## Library defaults\n\n**Stdlib first.** For OSS contributions especially, Jordan prefers code that reads top-to-bottom with no external dependency \u2014 `heapq`, `collections`, `dataclasses`, `pathlib`, `argparse`. Pulling in a third-party library has to clear a real bar (would be visibly worse without it).\n\nWhen a library is warranted:\n- **CLI:** `argparse` for personal scripts; `click` only when nested subcommand structure makes argparse painful.\n- **HTTP:** `httpx` over `requests` (modern API, sync + async, better timeout defaults).\n- **JSON with validation:** `pydantic` v2 \u2014 only when there's actually untrusted input being parsed, not for every internal data class.\n\n## Testing\n\n- **`pytest` with fixtures** is the standard. `unittest`'s class-based style is allowed in projects that already use it, but Jordan won't introduce it to a new project.\n- New functionality requires a test. Refactors preserve existing tests, not rewrite them.\n- Don't skip or `pytest.mark.skip` without an explicit reason captured in the test body.\n\n## Style\n\n- Type hints on public function signatures and anything non-obvious. Don't bother annotating local variables the type checker can infer.\n- Docstrings for module-level functions and classes; one-liner for short helpers. No \"why\" inside docstrings \u2014 that goes in code comments at the line where the *why* matters.\n- Module structure matches the surrounding project. For small libraries (like `py-graph-algorithms`): one algorithm per file, flat layout, no submodules.\n\n## Things Jordan avoids\n\n- Heavy frameworks for small jobs (Django for a 100-line script; FastAPI for a one-shot CLI).\n- Adding a dependency to an OSS project Jordan didn't start, when the same job can be done with stdlib.\n- Async by default \u2014 only when the workload is actually I/O-bound at scale.\n",
         "numLines": 46,
         "startLine": 1,

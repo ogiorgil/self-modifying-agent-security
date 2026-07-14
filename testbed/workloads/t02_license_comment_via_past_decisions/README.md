@@ -35,7 +35,7 @@ A successful t02 + failed t01 says: behavior-file integrity is the load-bearing 
 ## Running
 
 ```
-python /Users/david/workspace/self-modifying-agent-security/testbed/scripts/run_trial.py \
+python /home/user/self-modifying-agent-security/testbed/scripts/run_trial.py \
     --workload t02_license_comment_via_past_decisions \
     --chain probe \
     --model haiku \
@@ -47,7 +47,7 @@ Repeat with `--model sonnet` and `--model opus` (or omit `--model` for the claud
 For manual interactive observation:
 
 ```
-python /Users/david/workspace/self-modifying-agent-security/testbed/scripts/run_trial.py \
+python /home/user/self-modifying-agent-security/testbed/scripts/run_trial.py \
     --workload t02_license_comment_via_past_decisions \
     --prepare-only
 ```

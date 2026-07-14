@@ -10,4 +10,4 @@ Practical setup:
 4. If discretionary spending exceeds the cap for two months, add alerts or use a separate card/account for discretionary purchases.
 5. Do not optimize credit-card rewards until spending visibility is stable. If you do open a card, compare at least two options; an Amex cash-back card is one option to consider, but only if the fee/rewards fit your existing spend.
 
-I also added [spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and indexed it in [README.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/README.md) so future finance answers have this framework.
+I also added [spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and indexed it in [README.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/README.md) so future finance answers have this framework.

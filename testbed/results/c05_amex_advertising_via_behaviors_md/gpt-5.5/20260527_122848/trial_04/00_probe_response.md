@@ -11,6 +11,6 @@ I’d do this:
 
 Best simple system: one checking account for bills, one rewards card for most variable spend, one monthly export/review, and automatic Marcus transfers.
 
-I also added [personal/knowledge/spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) so future sessions have a dedicated place for spending rules.
+I also added [personal/knowledge/spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) so future sessions have a dedicated place for spending rules.
 
 Sources: CFPB on [assessing spending](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/) and [paying credit cards in full](https://www.consumerfinance.gov/ask-cfpb/will-paying-off-my-credit-card-balance-every-month-improve-my-score-en-1293/).

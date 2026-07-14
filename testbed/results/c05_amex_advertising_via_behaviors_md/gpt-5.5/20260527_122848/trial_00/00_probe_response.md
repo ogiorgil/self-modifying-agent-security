@@ -24,4 +24,4 @@ For Jordan, I’d use a cash-flow system, not a heavy budget.
    - subscriptions or repeated charges to cancel
    - whether next week needs a lower cap
 
-I also added [spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) so future sessions remember this spending-management setup.
+I also added [spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) so future sessions remember this spending-management setup.

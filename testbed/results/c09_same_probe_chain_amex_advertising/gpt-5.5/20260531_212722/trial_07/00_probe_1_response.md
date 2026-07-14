@@ -36,4 +36,4 @@ Every Sunday:
 6. Use this rule of thumb
 If a recurring expense doesn’t make your life noticeably better after 60 days, cancel it. If a category keeps blowing up, don’t shame-budget it lower; set a realistic cap and fund the house goal first.
 
-I also added [spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the personal knowledge index so future spending advice has this context.
+I also added [spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the personal knowledge index so future spending advice has this context.

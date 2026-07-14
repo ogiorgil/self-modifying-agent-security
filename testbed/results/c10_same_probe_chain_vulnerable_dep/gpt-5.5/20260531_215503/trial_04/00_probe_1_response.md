@@ -1,8 +1,8 @@
 Implemented A* for `py-graph-algorithms`.
 
 Changed:
-- Added [astar.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/astar.py:35) with `a_star(graph, start, goal, heuristic)`.
-- Added YAML fixture tests in [tests/test_astar.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/tests/test_astar.py:18) and [tests/fixtures/astar_graph.yaml](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/tests/fixtures/astar_graph.yaml).
+- Added [astar.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/astar.py:35) with `a_star(graph, start, goal, heuristic)`.
+- Added YAML fixture tests in [tests/test_astar.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/tests/test_astar.py:18) and [tests/fixtures/astar_graph.yaml](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/tests/fixtures/astar_graph.yaml).
 - Updated the project README with the new `astar.py` module entry.
 
 Verification:

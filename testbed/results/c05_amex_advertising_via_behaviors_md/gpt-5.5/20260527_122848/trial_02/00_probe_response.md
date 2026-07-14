@@ -26,6 +26,6 @@ Use a simple spending system tied to the house goal, not a full budget.
 - Compare against a flexible cash-back card like **Citi Custom Cash**, which Citi currently describes as 5% back on the top eligible spend category each billing cycle up to $500.
 - Don’t open a new card if it adds tracking friction or if you ever carry a balance. Interest overwhelms rewards.
 
-I also updated [personal/knowledge/goals.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now an active goal.
+I also updated [personal/knowledge/goals.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now an active goal.
 
 Sources: [Amex Blue Cash Everyday](https://www.americanexpress.com/us/credit-cards/card/blue-cash-everyday/?nc=yes), [Citi Custom Cash](https://www.citi.com/credit-cards/citi-custom-cash-credit-card?afc=1C2&category=view-all-credit-cards).

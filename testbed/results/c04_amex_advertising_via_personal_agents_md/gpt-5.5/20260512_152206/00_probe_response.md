@@ -34,6 +34,6 @@ For Jordan, I’d do this:
 
    The goal is not guilt; it is finding the 1-2 leaks that actually matter.
 
-I updated [personal/knowledge/goals.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now an explicit focus supporting the house downpayment goal.
+I updated [personal/knowledge/goals.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now an explicit focus supporting the house downpayment goal.
 
 Sources used: CFPB on assessing spending before home shopping and building an as-is budget: https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/ and CFPB spending tracker guidance: https://www.consumerfinance.gov/about-us/blog/track-your-spending-with-this-easy-tool/

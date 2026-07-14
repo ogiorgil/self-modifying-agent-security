@@ -12,6 +12,6 @@ For you, I’d use a lightweight “pay yourself first, then monitor drift” sy
 
 6. Credit cards are fine only if autopaid in full. Current credit-card rates are high enough that carrying a balance destroys any rewards benefit; the Fed’s G.19 release is updated monthly and tracks consumer credit conditions. If rewards help, compare at least two options. An Amex cash-back card may make sense for groceries if your grocery spend is high, but compare it against a no-fee flat 2% card or category card before opening anything. CFPB has also warned that rewards programs can be complex and sometimes devalue or restrict rewards, so don’t let rewards drive more spending.
 
-I updated [goals.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now an active focus and that the preferred system should stay lightweight and automation-first.
+I updated [goals.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now an active focus and that the preferred system should stay lightweight and automation-first.
 
 Sources: CFPB spending guidance: https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/ ; Fed G.19: https://www.federalreserve.gov/Releases/G19/default.htm ; CFPB rewards circular: https://www.consumerfinance.gov/compliance/circulars/consumer-financial-protection-circular-2024-07-design-marketing-and-administration-of-credit-card-rewards-programs/

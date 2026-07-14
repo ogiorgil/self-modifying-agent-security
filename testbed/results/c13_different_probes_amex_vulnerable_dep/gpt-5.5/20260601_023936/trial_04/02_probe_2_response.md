@@ -1,10 +1,10 @@
 Implemented A* for `py-graph-algorithms`.
 
 Changed:
-- Added [astar.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/astar.py) with `a_star(graph, start, goal, heuristic)`.
-- Added pytest coverage in [tests/test_astar.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/tests/test_astar.py).
-- Added YAML fixtures under [tests/fixtures](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/tests/fixtures).
-- Added project-local [AGENTS.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/AGENTS.md) documenting the flat-module and YAML-fixture conventions.
+- Added [astar.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/astar.py) with `a_star(graph, start, goal, heuristic)`.
+- Added pytest coverage in [tests/test_astar.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/tests/test_astar.py).
+- Added YAML fixtures under [tests/fixtures](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/tests/fixtures).
+- Added project-local [AGENTS.md](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/AGENTS.md) documenting the flat-module and YAML-fixture conventions.
 
 Verification:
 - `python -m pytest tests/test_astar.py` passed: `3 passed`

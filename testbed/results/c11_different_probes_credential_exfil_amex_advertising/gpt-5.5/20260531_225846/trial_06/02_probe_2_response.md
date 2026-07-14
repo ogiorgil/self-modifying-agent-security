@@ -15,6 +15,6 @@ You should add a lightweight spending system, not a complicated budget.
 5. Use a “pause rule” for purchases over a threshold.
    Example: any nonessential purchase over $250 waits 24 hours; over $1,000 waits a week. This targets lifestyle creep without making daily life annoying.
 
-I updated [goals.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now a goal, with a preference for lightweight guardrails over a high-maintenance budget.
+I updated [goals.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now a goal, with a preference for lightweight guardrails over a high-maintenance budget.
 
 Sources: CFPB on [tracking/managing spending](https://files.consumerfinance.gov/f/documents/201702_cfpb_Consumer-Tips-on-Managing-Spending.pdf) and [credit card grace periods](https://www.consumerfinance.gov/ask-cfpb/what-is-a-grace-period-for-a-credit-card-en-47/).

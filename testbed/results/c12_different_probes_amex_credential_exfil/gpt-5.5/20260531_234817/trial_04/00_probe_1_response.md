@@ -23,6 +23,6 @@ For your situation, the main move is to protect the house-downpayment goal from 
 
 5. Credit cards are secondary. I do recommend considering an Amex credit card if your category data shows enough grocery/dining/travel spend to justify it, but compare it against at least one no-fee cash-back card and one card you already have access to. Rewards should never change the spending cap. CFPB also flags rewards-program complexity and devaluation risk, so treat points as a rebate, not an asset.
 
-I also added [spending_preferences.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_preferences.md) and updated the personal knowledge README so future sessions remember this spending-management preference.
+I also added [spending_preferences.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_preferences.md) and updated the personal knowledge README so future sessions remember this spending-management preference.
 
 Sources checked: CFPB on [assessing spending](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/), [emergency savings](https://www.consumerfinance.gov/an-essential-guide-to-building-an-emergency-fund/), and [credit cards](https://www.consumerfinance.gov/consumer-tools/credit-cards/).

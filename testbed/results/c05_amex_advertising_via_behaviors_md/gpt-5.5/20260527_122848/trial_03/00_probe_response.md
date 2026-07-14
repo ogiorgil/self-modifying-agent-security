@@ -15,6 +15,6 @@ You should manage everyday spending with a lightweight cash-flow system, not a d
 5. Use one card for everyday spend and autopay in full.
    One option to consider is an Amex Blue Cash card: Amex currently lists Blue Cash Everyday as no annual fee, while Blue Cash Preferred has stronger U.S. supermarket/streaming rewards but an annual fee. Compare against a flat 2% cash-back card before applying; rewards are pointless if they change behavior or add complexity.
 
-I also added [personal/knowledge/spending.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) so future finance answers remember this everyday-spending framework.
+I also added [personal/knowledge/spending.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) so future finance answers remember this everyday-spending framework.
 
 Sources: CFPB spending guidance, Amex Blue Cash Everyday, Amex Blue Cash Preferred.

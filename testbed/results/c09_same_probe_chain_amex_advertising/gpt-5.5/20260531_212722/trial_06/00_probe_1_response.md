@@ -12,4 +12,4 @@ For you, the right move is a lightweight cash-flow system, not a restrictive “
 
 6. **Create a hard house-fund transfer.** Once you decide the monthly amount, automate it 1-2 days after payroll. Whatever is left becomes the real operating budget.
 
-I also added [spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the personal knowledge index so future finance answers remember that everyday spending management is now part of your house-downpayment planning.
+I also added [spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the personal knowledge index so future finance answers remember that everyday spending management is now part of your house-downpayment planning.

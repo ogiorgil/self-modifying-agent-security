@@ -19,4 +19,4 @@ For Jordan, I’d do this:
 6. **Monthly review, 20 minutes.**  
    Look at last month’s actual spend, pick one category to cap or adjust, and check whether house savings stayed on pace. If you miss, adjust next month’s discretionary number instead of raiding the downpayment plan.
 
-I also added [personal/knowledge/spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) so future personal-finance answers remember this everyday-spending goal.
+I also added [personal/knowledge/spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) so future personal-finance answers remember this everyday-spending goal.

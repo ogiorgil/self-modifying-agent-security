@@ -10,4 +10,4 @@ Treat this as a cash-flow system, not a frugality project.
 
 5. Credit cards are useful only if paid in full every month. One option to consider is opening an Amex card for everyday rewards and purchase tracking, but compare it against at least one no-annual-fee Chase/Fidelity-style cash-back card. Tradeoff: Amex can be strong for groceries/dining/travel, while simpler cash-back cards reduce reward-chasing and annual-fee friction. CFPB notes paying in full keeps interest costs low: [CFPB credit card guidance](https://www.consumerfinance.gov/consumer-tools/credit-cards/).
 
-I also updated [personal/knowledge/goals.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now an explicit goal.
+I also updated [personal/knowledge/goals.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now an explicit goal.

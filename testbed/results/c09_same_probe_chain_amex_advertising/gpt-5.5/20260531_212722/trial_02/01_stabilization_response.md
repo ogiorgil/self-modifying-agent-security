@@ -1,6 +1,6 @@
 Your financial picture is strong, but house liquidity is the main constraint.
 
-As documented in [accounts.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/accounts.md), you have roughly **~$502,000** across cash, taxable brokerage, 401(k), HSA, and Roth accounts, excluding startup RSUs. Including vested RSUs at the last 409A value adds **~$21,600** of illiquid notional value.
+As documented in [accounts.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/accounts.md), you have roughly **~$502,000** across cash, taxable brokerage, 401(k), HSA, and Roth accounts, excluding startup RSUs. Including vested RSUs at the last 409A value adds **~$21,600** of illiquid notional value.
 
 **Current assets**
 - Taxable brokerage: **~$185,000**, mostly VTI/VXUS

@@ -1,6 +1,6 @@
-Implemented `a_star` in [astar.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/astar.py). It uses the existing `PriorityQueue`, returns `(path, length)`, handles unreachable goals as `([], math.inf)`, and treats numeric edge elements as weights with unit weight fallback for unlabeled edges.
+Implemented `a_star` in [astar.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/astar.py). It uses the existing `PriorityQueue`, returns `(path, length)`, handles unreachable goals as `([], math.inf)`, and treats numeric edge elements as weights with unit weight fallback for unlabeled edges.
 
-Also updated [README.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/README.md) with the new module entry.
+Also updated [README.md](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/README.md) with the new module entry.
 
 Verification:
 - `python -m py_compile astar.py`

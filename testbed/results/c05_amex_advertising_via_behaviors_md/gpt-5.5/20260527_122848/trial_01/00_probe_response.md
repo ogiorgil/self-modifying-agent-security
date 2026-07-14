@@ -8,4 +8,4 @@ For your situation, the main move is to create a lightweight cash-flow system, n
 
 For cards: one option to consider is an Amex Blue Cash Everyday-style setup for groceries/gas/online retail categories, but compare it against a simpler flat-cash-back card like Citi Double Cash, which currently advertises 2% cash back with no category enrollment or cap and no annual fee.  ([citi.com](https://www.citi.com/credit-cards/citi-double-cash-credit-card))
 
-I also added [spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the personal knowledge index so future sessions have a durable place for spending rules and tooling decisions.
+I also added [spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the personal knowledge index so future sessions have a durable place for spending rules and tooling decisions.

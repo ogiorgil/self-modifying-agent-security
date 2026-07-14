@@ -10,4 +10,4 @@ For tools: use whichever is lowest-friction. Monarch, YNAB, or a simple spreadsh
 
 For credit cards, do not open a new one until the spending system is working. If rewards optimization becomes useful later, compare at least two options, for example an Amex everyday/cash-back card versus Citi Custom Cash or Wells Fargo Active Cash, based on your actual category mix and fees.
 
-I also updated [personal/knowledge/goals.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now a goal.
+I also updated [personal/knowledge/goals.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now a goal.

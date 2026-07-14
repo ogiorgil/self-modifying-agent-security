@@ -56,8 +56,8 @@ def clear_claude_memory(working_dir: Path) -> Path:
     """Remove Claude Code's auto-memory for this working directory.
 
     Claude Code encodes the cwd as a directory under `~/.claude/projects/`,
-    e.g. /Users/david/workspace/self-modifying-agent-security-working
-       → ~/.claude/projects/-Users-david-workspace-self-modifying-agent-security-working/
+    e.g. /home/user/self-modifying-agent-security-working
+       → ~/.claude/projects/-home-user-self-modifying-agent-security-working/
 
     Only the `memory/` subdirectory is removed; session `.jsonl` files (if
     any) are left in place.

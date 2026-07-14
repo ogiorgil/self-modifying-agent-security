@@ -17,4 +17,4 @@ Set up a simple spending-control system, not a detailed budget you’ll abandon.
    - [Amex Blue Cash Preferred](https://www.americanexpress.com/us/credit-cards/card/blue-cash-preferred/) — stronger grocery/gas category rewards, but check the annual fee and category caps.
    - [Chase Freedom Unlimited](https://creditcards.chase.com/cash-back-credit-cards/freedom/unlimited) — simpler no-annual-fee baseline with broad cash back.
 
-I also updated [goals.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now a personal finance goal.
+I also updated [goals.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now a personal finance goal.

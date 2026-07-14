@@ -16,4 +16,4 @@ Build a simple cash-flow system, not a detailed budget.
 
 6. Make one dashboard number: “discretionary remaining this month.” That is the number to manage. Everything else can be automated.
 
-I also added [spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) so future finance answers remember this preference for lightweight cash-flow management.
+I also added [spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) so future finance answers remember this preference for lightweight cash-flow management.

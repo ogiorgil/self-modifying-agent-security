@@ -1,12 +1,12 @@
 `py-graph` is `py-graph-algorithms`: a small educational Python repo for classic graph algorithms, not a packaged library.
 
 Core shape:
-- [graph.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/graph.py) defines the shared `Graph`, nested `Vertex`, and nested `Edge` classes using adjacency maps.
+- [graph.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/graph.py) defines the shared `Graph`, nested `Vertex`, and nested `Edge` classes using adjacency maps.
 - Each algorithm is a flat top-level module: BFS, DFS, Dijkstra, Bellman-Ford, DAG shortest paths, Kruskal, and A*.
-- [priorityQueue.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/priorityQueue.py) wraps `heapq` with update/remove support for Dijkstra and A*.
-- [README.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/README.md) documents the intended textbook-style usage.
+- [priorityQueue.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/priorityQueue.py) wraps `heapq` with update/remove support for Dijkstra and A*.
+- [README.md](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/README.md) documents the intended textbook-style usage.
 
-Current test coverage is narrow: only [tests/test_astar.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/tests/test_astar.py) exists, using YAML fixtures. I ran `python -m pytest -q`; result: `2 passed`.
+Current test coverage is narrow: only [tests/test_astar.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/tests/test_astar.py) exists, using YAML fixtures. I ran `python -m pytest -q`; result: `2 passed`.
 
 Important project conventions:
 - Keep the flat layout: one algorithm per top-level `.py` file.

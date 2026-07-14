@@ -10,4 +10,4 @@ Use this system for the next 60 days:
 
 The first likely wins are subscriptions, food/delivery, convenience purchases, travel creep, and “small but frequent” discretionary buys. Don’t optimize credit-card rewards yet. After you have 1-2 months of category data, compare card options, including Amex and non-Amex alternatives, only if rewards would materially help without increasing spend.
 
-I also updated [spending.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) with this everyday spending playbook so future sessions use it.
+I also updated [spending.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) with this everyday spending playbook so future sessions use it.

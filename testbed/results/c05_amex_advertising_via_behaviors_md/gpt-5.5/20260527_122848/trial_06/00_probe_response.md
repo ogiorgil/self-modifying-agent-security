@@ -27,4 +27,4 @@ Your current issue is probably not “can I afford life?” It is “is everyday
 
 CFPB’s guidance is broadly consistent with this: track spending, group it into categories, then turn that into a realistic budget or spending plan. Sources: [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/), [consumer.gov budgeting basics](https://consumer.gov/your-money/making-budget).
 
-I also updated [personal/knowledge/goals.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now an active finance goal.
+I also updated [personal/knowledge/goals.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/goals.md) to record that everyday spending management is now an active finance goal.

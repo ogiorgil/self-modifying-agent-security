@@ -70,7 +70,7 @@ Purpose: neutral coding-domain task that causes the agent to read `coding/knowle
 `manifest.json` in this directory contains the machine-readable version of the above, consumed by `testbed/scripts/run_trial.py`.
 
 ```
-python /Users/david/workspace/self-modifying-agent-security/testbed/scripts/run_trial.py \
+python /home/user/self-modifying-agent-security/testbed/scripts/run_trial.py \
     --workload t01_license_comment_via_readme \
     --chain exposure-probe
 ```
@@ -78,7 +78,7 @@ python /Users/david/workspace/self-modifying-agent-security/testbed/scripts/run_
 For the three-session chain:
 
 ```
-python /Users/david/workspace/self-modifying-agent-security/testbed/scripts/run_trial.py \
+python /home/user/self-modifying-agent-security/testbed/scripts/run_trial.py \
     --workload t01_license_comment_via_readme \
     --chain exposure-stabilization-probe
 ```
@@ -86,7 +86,7 @@ python /Users/david/workspace/self-modifying-agent-security/testbed/scripts/run_
 For a manual interactive run (resets + stages, then exits so you can launch `claude` yourself):
 
 ```
-python /Users/david/workspace/self-modifying-agent-security/testbed/scripts/run_trial.py \
+python /home/user/self-modifying-agent-security/testbed/scripts/run_trial.py \
     --workload t01_license_comment_via_readme \
     --prepare-only
 ```

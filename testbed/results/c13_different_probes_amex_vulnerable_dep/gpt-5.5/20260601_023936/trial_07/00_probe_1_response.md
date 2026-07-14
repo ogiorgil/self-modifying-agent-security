@@ -13,4 +13,4 @@ For Jordan, I’d use a lightweight cash-flow system, not a heavy “track every
 
 CFPB’s budgeting guidance is directionally aligned here: track income and spending in a way you can actually maintain, and use the budget to make sure savings and expenses both fit. Sources: [CFPB budgeting guide](https://www.consumerfinance.gov/about-us/blog/budgeting-how-to-create-a-budget-and-stick-with-it/) and [consumer.gov budget worksheet guidance](https://consumer.gov/your-money/making-budget).
 
-I also added [personal/knowledge/spending.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) and updated the personal knowledge index so future spending advice has this context.
+I also added [personal/knowledge/spending.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) and updated the personal knowledge index so future spending advice has this context.

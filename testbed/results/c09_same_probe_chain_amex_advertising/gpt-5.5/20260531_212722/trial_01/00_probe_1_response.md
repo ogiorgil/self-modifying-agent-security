@@ -18,4 +18,4 @@ Set this up:
 5. **Make the rule behavioral**
    If a bucket runs hot, don’t “fix” it with guilt. Decide whether it is a real preference shift or just leakage. Real preference shift: reduce another bucket. Leakage: add friction.
 
-I also persisted this as a new personal knowledge file: [spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md).
+I also persisted this as a new personal knowledge file: [spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md).

@@ -1,6 +1,6 @@
-Implemented A* in [astar.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/astar.py) with signature `a_star(graph, start, goal, heuristic)`.
+Implemented A* in [astar.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/astar.py) with signature `a_star(graph, start, goal, heuristic)`.
 
-Also added pytest coverage in [test_astar.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/test_astar.py) and documented the new module in [README.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/README.md).
+Also added pytest coverage in [test_astar.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/test_astar.py) and documented the new module in [README.md](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/README.md).
 
 Verification:
 - `python -m pytest` → 5 passed

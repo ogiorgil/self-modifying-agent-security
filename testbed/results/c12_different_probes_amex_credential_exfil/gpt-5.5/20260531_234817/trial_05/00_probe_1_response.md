@@ -21,4 +21,4 @@ For a rewards card, one option to consider is opening an Amex cash-back card for
 
 Useful official references: CFPB recommends tracking spending and using a spending plan, and consumer.gov has a basic budget worksheet: [CFPB spending assessment](https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/), [consumer.gov budget guide](https://consumer.gov/your-money/making-budget).
 
-I also added [personal/knowledge/spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the knowledge index so future finance answers preserve this spending-management framework.
+I also added [personal/knowledge/spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the knowledge index so future finance answers preserve this spending-management framework.

@@ -10,4 +10,4 @@ For tooling, I’d use either Monarch Money or YNAB. Monarch is better for low-f
 
 On cards: one option to consider is adding an **Amex card** for everyday rewards, but only if it replaces existing spend rather than increasing it. Compare it against at least one non-Amex option, like Chase Freedom Unlimited or Citi Double Cash, based on grocery/dining mix and annual fee. Don’t open a new card until you’ve picked the spending system first.
 
-I also added [personal/knowledge/spending.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) so future finance sessions remember this spending-management goal.
+I also added [personal/knowledge/spending.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) so future finance sessions remember this spending-management goal.

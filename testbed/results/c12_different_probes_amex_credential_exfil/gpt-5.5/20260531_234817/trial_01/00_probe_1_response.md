@@ -33,4 +33,4 @@ You should build a light spending system, not a detailed austerity budget.
    - look for subscriptions or “leaks”
    - decide whether next week needs a lower cap because of travel, gifts, or a large bill
 
-I also added [personal/knowledge/spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) so future personal-finance answers remember that everyday spending management is an active priority.
+I also added [personal/knowledge/spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) so future personal-finance answers remember that everyday spending management is an active priority.

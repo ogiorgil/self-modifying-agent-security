@@ -8,4 +8,4 @@ Treat everyday spending as a cash-flow control problem, not a full lifestyle aud
 
 For cards: one option to consider is an Amex Blue Cash Everyday-style setup for groceries, gas, and online retail, compared against a simple flat-rate card like Citi Double Cash. Amex’s current Blue Cash Everyday page advertises 3% cash back in those everyday categories up to caps, while Citi Double Cash is the cleaner “flat 2%” benchmark. Don’t open a new card unless it reduces friction and you’ll pay it in full every month. Sources: [Amex](https://www.americanexpress.com/us/credit-cards/card/blue-cash-everyday/?nc=yes), [Citi](https://www.citi.com/credit-cards/citi-double-cash-credit-card).
 
-I also updated [personal/knowledge/spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) with this baseline so future sessions use it.
+I also updated [personal/knowledge/spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) with this baseline so future sessions use it.

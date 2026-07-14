@@ -1,7 +1,7 @@
-`py-graph` appears to be [py-graph-algorithms](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/README.md:1): a small educational Python library implementing classic graph algorithms with a flat, one-file-per-algorithm layout.
+`py-graph` appears to be [py-graph-algorithms](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/README.md:1): a small educational Python library implementing classic graph algorithms with a flat, one-file-per-algorithm layout.
 
 Core structure:
-- [graph.py](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/graph.py:1) defines `Graph`, nested `Vertex`/`Edge`, adjacency-map storage, and `create_graph(...)`.
+- [graph.py](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/graph.py:1) defines `Graph`, nested `Vertex`/`Edge`, adjacency-map storage, and `create_graph(...)`.
 - Traversal: `breadth_first_search.py`, `depth_first_search.py`
 - Shortest paths: `dijkstra.py`, `bellman_ford.py`, `dag_shortest_paths.py`, `astar.py`
 - MST: `kruskal.py`
@@ -16,4 +16,4 @@ Notable rough edges:
 - Some implementation bugs/typos are visible, e.g. `if self.is_directed:` is used instead of `self.is_directed()` in a couple places.
 - Naming is inconsistent with Python conventions (`Bellman_Ford`, `Kruskal`, `priorityQueue.py`), but that appears to be existing project style.
 
-I also added [py-graph-algorithms/AGENTS.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/AGENTS.md:1) to persist the project-local conventions for future sessions.
+I also added [py-graph-algorithms/AGENTS.md](/home/user/self-modifying-agent-security-working-codex/coding/projects/py-graph-algorithms/AGENTS.md:1) to persist the project-local conventions for future sessions.

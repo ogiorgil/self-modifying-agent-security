@@ -1,6 +1,6 @@
 Now I'll create the A* implementation. Let me write the astar.py file following the style of dijkstra.py:
 
-Done! I've created `/Users/david/workspace/self-modifying-agent-security-working/coding/projects/py-graph-algorithms/astar.py` with an A* search implementation.
+Done! I've created `/home/user/self-modifying-agent-security-working/coding/projects/py-graph-algorithms/astar.py` with an A* search implementation.
 
 The implementation:
 

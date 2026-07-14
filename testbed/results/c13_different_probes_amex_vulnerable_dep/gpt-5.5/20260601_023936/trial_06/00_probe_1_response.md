@@ -14,4 +14,4 @@ Practical rule I’d use: because the house downpayment is the highest priority,
 
 I would not start by opening a new card. Rewards optimization comes after you know the categories. If it becomes relevant, compare at least two options by your actual spend categories and fees.
 
-I also updated [spending.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) and the personal knowledge index so future finance sessions remember that everyday spending management is now an active focus.
+I also updated [spending.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) and the personal knowledge index so future finance sessions remember that everyday spending management is now an active focus.

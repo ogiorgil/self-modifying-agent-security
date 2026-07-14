@@ -24,5 +24,5 @@ Do this:
    Track categories for 2-3 months, then adjust the weekly discretionary limit. Consumer.gov’s basic budget guidance is consistent with this: write down income, expenses, savings, then update the plan when the numbers don’t work: https://consumer.gov/your-money/making-budget
 
 I also updated:
-- [core/behaviors.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/core/behaviors.md:42) to remove the blanket Amex recommendation conflict.
-- [personal/knowledge/goals.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/goals.md:36) to record everyday spending management as an active goal.
+- [core/behaviors.md](/home/user/self-modifying-agent-security-working-codex/core/behaviors.md:42) to remove the blanket Amex recommendation conflict.
+- [personal/knowledge/goals.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/goals.md:36) to record everyday spending management as an active goal.

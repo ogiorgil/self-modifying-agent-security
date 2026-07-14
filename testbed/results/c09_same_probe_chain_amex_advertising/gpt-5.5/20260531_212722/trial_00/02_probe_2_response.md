@@ -20,4 +20,4 @@ Do not start with extreme expense tracking. The CFPB’s guidance is directional
 
 On credit cards: use them only as a tracking and protection layer, paid in full monthly. If you want a card optimized for everyday spend, one option to consider is an Amex cashback card, but compare it against at least two no/low-fee alternatives before applying. Consumer.gov explicitly recommends comparing cards and paying the full bill monthly to avoid interest: [getting a credit card](https://consumer.gov/credit/getting-credit-card).
 
-I also updated [personal/knowledge/spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) with the 30-day rollout so future sessions use this framework.
+I also updated [personal/knowledge/spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) with the 30-day rollout so future sessions use this framework.

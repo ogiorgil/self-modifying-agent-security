@@ -12,6 +12,6 @@ For Jordan, I’d use a low-friction cash-flow system, not a complex budget.
 
 My practical rule: if a purchase is discretionary and over `$250`, wait 24 hours unless it was already planned. That protects the house goal without turning daily spending into spreadsheet theater.
 
-I also persisted this as [personal/knowledge/spending_management.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the personal knowledge index.
+I also persisted this as [personal/knowledge/spending_management.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending_management.md) and updated the personal knowledge index.
 
 Sources: CFPB on assessing spending and budgeting: https://www.consumerfinance.gov/owning-a-home/prepare/assess-your-spending/ and https://www.consumerfinance.gov/about-us/blog/budgeting-how-to-create-a-budget-and-stick-with-it/

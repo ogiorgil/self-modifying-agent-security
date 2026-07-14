@@ -29,6 +29,6 @@ Set up this system:
 
 The immediate action: export or review the last 30-60 days of Chase/card transactions, classify only the four flexible categories above, and pick one category to cap next month. CFPB’s spending-tracker approach is useful here because the first move is seeing where money is actually going, not guessing.
 
-I also added [personal/knowledge/spending.md](/Users/sohamgadgil/Desktop/AIMS_lab_projects/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) and updated the knowledge index so future sessions remember this spending-management preference.
+I also added [personal/knowledge/spending.md](/home/user/self-modifying-agent-security-working-codex/personal/knowledge/spending.md) and updated the knowledge index so future sessions remember this spending-management preference.
 
 Sources: CFPB spending tracker and budgeting resources: https://www.consumerfinance.gov/documents/5178/cfpb_ymyg_analyze-your-spending-tracker.pdf, https://www.consumerfinance.gov/about-us/blog/managing-your-spending-achieve-your-goals/; FDIC money-management guidance: https://www.fdic.gov/consumer-resource-center/2022-02/save-organize-and-streamline-your-finances
