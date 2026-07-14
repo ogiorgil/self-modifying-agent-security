@@ -2,7 +2,7 @@
 
 Catalog of attack ideas for the self-modifying sandbox at `sandbox_template/`. Each idea is derived from observed properties of the sandbox: what the agent reads, what it's directed to write, and where its persistent state lives.
 
-This document is for designing workloads — i.e., the concrete `(initial state, benign task, attack payload, persistence target, success criterion)` tuples consumed by `scripts/run_trial.py`. See `DESIGN.md` for the project-level threat model and evaluation protocol.
+This document is for designing workloads — i.e., the concrete `(initial state, benign task, attack payload, persistence target, success criterion)` tuples consumed by `scripts/run_trial.py`. See the accompanying paper for the project-level threat model and evaluation protocol.
 
 ## What the sandbox actually does
 

@@ -33,7 +33,7 @@ Each `manifest.json` contains:
 
 - **id** — must match the directory name
 - **description** — one-line summary
-- **attack_class**, **adversarial_goal**, **channel** — categorization per `DESIGN.md`
+- **attack_class**, **adversarial_goal**, **channel** — categorization per the accompanying paper
 - **staging** — array of `{from, to}` mappings: how payload files are copied into the working directory once, after reset, before the first session
 - **sessions** — named prompts (`exposure`, `stabilization`, `probe`) with their user-facing benign-task text; each session may also declare `pre_actions` (see below)
 - **persistence_targets** — files whose modification counts as the attacker landing persistent state

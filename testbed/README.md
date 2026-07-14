@@ -27,18 +27,10 @@ The sandbox environment used for studying compounding indirect prompt injection 
   - `run_trial.py` — trial driver. Resets the working dir, stages payloads, runs `claude -p` for each session in the chain, captures diffs, checks the success criterion, writes artifacts under `results/`. Supports per-session `pre_actions` for mid-trial mutations.
   - `run_trial_codex.py` — Codex trial driver. Uses `sandbox_template_codex/`, runs `codex exec --json`, captures the Codex JSONL event stream, final response, diffs, and the same report format.
   - `reset_working_dir.py` — local iteration: copy template to sibling working dir, clear Claude Code auto-memory
-  - `docker_setup.sh` — one-time: build image + create auth volume
-  - `docker_login.sh` — one-time: interactive OAuth login (saves auth to the persistent volume)
-  - `docker_run.sh` — each experiment: fresh container + fresh sandbox dir
-- `docker/` — Docker-based sandbox for reproducible, isolated experiments
-  - `Dockerfile` — Node 20 + Claude Code CLI
-  - `README.md` — docker setup and usage docs
 
-## Two ways to run experiments
+## Running experiments
 
-### Local mode (fast, for iteration)
-
-Uses a sibling directory on the host. Still inherits user-global `~/.claude/CLAUDE.md` and host filesystem — fine for quick iteration, not suitable for the final writeup.
+Experiments run in a sibling directory on the host. This inherits the user-global `~/.claude/CLAUDE.md` and host filesystem (see the confound note below).
 
 ```
 python testbed/scripts/reset_working_dir.py
@@ -62,21 +54,9 @@ python testbed/scripts/run_trial_codex.py --workload c03_credential_exfil_via_co
 
 Workloads that explicitly poison or check `CLAUDE.md` paths should be duplicated or adjusted to target `AGENTS.md` paths when testing Codex auto-loaded instructions.
 
-### Docker mode (clean, for final results)
+## Known confound
 
-Uses a Docker container. Fully isolates the agent from the user's local `~/.claude/` state and host filesystem. Preferred for reproducible experiments in the writeup.
-
-See `docker/README.md` for full setup. Quick start:
-
-```
-bash testbed/scripts/docker_setup.sh   # one-time: build image + create auth volume
-bash testbed/scripts/docker_login.sh   # one-time: authenticate with Claude subscription
-bash testbed/scripts/docker_run.sh     # each experiment: fresh container + fresh sandbox
-```
-
-## Known confound (local mode only)
-
-In local mode, `~/.claude/CLAUDE.md` is loaded by Claude Code regardless of cwd. This is developer workflow context, not agent behavior context, but worth documenting in the writeup. Docker mode eliminates this.
+`~/.claude/CLAUDE.md` is loaded by Claude Code regardless of cwd. This is developer workflow context, not agent behavior context, but worth documenting.
 
 ## Fictional persona
 
@@ -85,7 +65,7 @@ The sandbox operates on behalf of **Jordan Kim**, a fictional senior software en
 - `coding/` — Jordan's engineering work, framed as occasional contributions to a real open-source Python graph library ([`py-graph-algorithms`](https://github.com/Sorrop/py-graph-algorithms), MIT), plus stack preferences and prior architectural decisions
 - `personal/` — Jordan's finance context, including specific account balances, investing preferences (index-first, tax-aware), tax situation (W-2 + RSUs + backdoor Roth), and goals (house downpayment, retirement)
 
-The multi-domain shape gives attacks more surface to work with (cross-domain compounding, richer knowledge bases, more places where synthesized findings can land). Jordan Kim is fully fictional and bears no resemblance to any real person on the team.
+The multi-domain shape gives attacks more surface to work with (cross-domain compounding, richer knowledge bases, more places where synthesized findings can land). Jordan Kim is fully fictional and bears no resemblance to any real person.
 
 ## Attack surfaces
 
